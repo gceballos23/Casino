@@ -15,4 +15,8 @@ export class Slot{
     public getFiguraMayor():string{
         return this.figuras[this.figuras.length - 1]     
     }
+
+    public getUltimaJugada():string{
+        return this.UltimaJugada;
+    }
 }
