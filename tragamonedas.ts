@@ -159,7 +159,7 @@ export class Tragamoneda{
         let control :number = 0;
         let probabilidad :boolean = this.probabilidadGanar(); 
         while (control ===  0 ) {       
-            this.setUltimaJugada;            
+            this.setUltimaJugada();            
             if ( this.SaberSiEsJugadaGanadora() === probabilidad ) {
                 control = 1;
             }
@@ -172,7 +172,7 @@ export class Tragamoneda{
             if (this.GanarPozo()){
                 this.setPremio(this.getPozoTotal())
                 this.IngresarDinero(this.getPremio);
-                this.resetPremioPozo;
+                this.resetPremioPozo();
 
             }else{
                 this.setPremio(this.calcularPremio())
