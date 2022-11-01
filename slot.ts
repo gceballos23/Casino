@@ -1,29 +1,29 @@
 export class Slot{
     protected figuras : string[];
     protected UltimaJugada : string;
-    protected posicion :number
+    protected posicion :number;
 
     constructor(pFiguras: string[]){
         this.figuras = pFiguras;
-        this.UltimaJugada = this.figuras[0];
+        this.UltimaJugada = pFiguras[0];
         this.posicion = 0;
     }
 
     public girarSlots():void{
        let posicion : number =  Math.floor(Math.random() * this.figuras.length);
        this.UltimaJugada =this.figuras[posicion];
-       this.setPosicon(posicion);
+       this.setPosicion(posicion);
     }
 
     public getFiguraMayor():string{
         return this.figuras[this.figuras.length - 1]     
     }
 
-    public getUltimaJugada():string{
+    public getUltimaJugadaSola():string{
         return this.UltimaJugada;
     }
 
-    protected setPosicon(pIndice : number):void{
+    protected setPosicion(pIndice : number):void{
         this.posicion = pIndice;
     }
     

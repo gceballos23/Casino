@@ -17,12 +17,14 @@ export class Tragamoneda{
         this.tipoSlot = ptipoSlot;
         this.cantidadSlot = pCantidadSlot;
         /* se carga la cantidad de slot */
-        this.cargarSlot();
+       /* this.cargarSlot(); */
+       this.slots = [];
         this.ultimaJugada=[];
         this.historialJugadas=[];
         this.dineroIngresado=0;
         this.pozoTotal= pPozoTotal;
-        this.setJugadaPozoTotal();
+        /* this.setJugadaPozoTotal(); */
+        this.jugadaPozoTotal = [];
         this.apuestaMinima = 1;
         this.apuesta = this.apuestaMinima;
         this.premio= 0;
@@ -33,10 +35,12 @@ export class Tragamoneda{
         return this.cantidadSlot;
     }
 
-    protected cargarSlot():void{
+    public cargarSlot():void{
         for( let i:number = 0; i<this.cantidadSlot; i++){
             this.slots.push(this.tipoSlot);
+            this.slots[i].girarSlots();
         }      
+        this.setJugadaPozoTotal();
     }
 
     public UltimaJugada():string[]{
@@ -44,10 +48,10 @@ export class Tragamoneda{
     }
 
     protected setUltimaJugada():void{ 
-        this.ultimaJugada= [];
-        for( let i:number = 0; i<this.cantidadSlot; i++){
+        this.ultimaJugada = [];        
+        for( let i:number = 0; i < this.cantidadSlot ; i++){
             this.slots[i].girarSlots();
-            this.ultimaJugada.push(this.slots[i].getUltimaJugada());
+            this.ultimaJugada.push(this.slots[i].getUltimaJugadaSola());
         } 
     }
     
@@ -85,10 +89,14 @@ export class Tragamoneda{
         }
     }
 
+    public getApuesta():number{
+        return this.apuesta;
+    }
+
     protected probabilidadGanar():boolean{
         /* probalidad de 1 en 20 */
         let probabilidad : number[]=[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1]
-        if  (probabilidad[Math.floor(Math.random() * probabilidad.length)] ===0){
+        if  (probabilidad[Math.floor(Math.random() * probabilidad.length)] === 0){
             return true;
         }else{
             return false;
@@ -100,8 +108,8 @@ export class Tragamoneda{
     }
 
     protected setHistorialJugadas():void{
-        for( let i:number = 0; i<this.cantidadSlot; i++){
-            this.historialJugadas.push(this.slots[i].getUltimaJugada());
+        for( let i:number = 0; i< this.cantidadSlot ; i++){
+            this.historialJugadas.push(this.slots[i].getUltimaJugadaSola());
         }  
     }
 
@@ -110,7 +118,7 @@ export class Tragamoneda{
     }
 
     protected setJugadaPozoTotal():void{
-        for( let i:number = 0; i<this.cantidadSlot; i++){
+        for( let i:number = 0; i< this.cantidadSlot  ; i++){
             this.jugadaPozoTotal.push(this.slots[i].getFiguraMayor());
         }  
     }
@@ -125,13 +133,14 @@ export class Tragamoneda{
 
     protected SaberSiEsJugadaGanadora():boolean{
         let ganadora : boolean = false;
-        for( let i:number = 0; i<this.cantidadSlot - 1; i++){
-            if (this.slots[i].getUltimaJugada() === this.slots[i +1].getUltimaJugada()){
+        
+        for (let i:number = 0; i < this.cantidadSlot -1; i++){
+
+            if (this.ultimaJugada[i] === this.ultimaJugada[i+1]){
                 ganadora =   true;
             } else {
                 ganadora = false;
                 break;
-
             }
         } 
         return ganadora;
@@ -155,12 +164,11 @@ export class Tragamoneda{
         return this.apuesta *  (this.slots[0].getposicion() + 1) * 10;
     }
 
-    public TirarPalanca(){
+    public TirarPalanca():void{
         let control :number = 0;
-        let probabilidad :boolean = this.probabilidadGanar(); 
-        while (control ===  0 ) {       
-            this.setUltimaJugada();            
-            if ( this.SaberSiEsJugadaGanadora() === probabilidad ) {
+        while (control < 1 ) {    
+            this.setUltimaJugada();          
+            if ( this.probabilidadGanar() === this.SaberSiEsJugadaGanadora() ) {
                 control = 1;
             }
 
@@ -171,7 +179,7 @@ export class Tragamoneda{
         if (this.SaberSiEsJugadaGanadora()){
             if (this.GanarPozo()){
                 this.setPremio(this.getPozoTotal())
-                this.IngresarDinero(this.getPremio);
+                this.IngresarDinero(this.getPremio());
                 this.resetPremioPozo();
 
             }else{
