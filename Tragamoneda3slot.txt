@@ -1,0 +1,15 @@
+TRAGAMONEDAS 
+
+APUESTAS:
+Opción 1 = 1 peso
+Opción 2 = 3 peso
+Opción 3 = 5 peso
+
+GANANCIAS:
+
+3 Naranjas = 10 * APUESTA
+3 Sietes = 20 * APUESTA
+3 Bar = 30 * APUESTA
+3 Pera = 40 * APUESTA
+3 Bananas = 50 * APUESTA
+3 Cerezas = POZO
