@@ -8,7 +8,7 @@ export class JuegoCasino{
     constructor(pNombre:string){
         this.nombre = pNombre;
         this.archivo = "./" + pNombre+".txt";
-        this.setDescripcion;
+        this.descripcion =  this.leerArchivo();
     }
 
     public getNombre():string{
@@ -36,6 +36,10 @@ export class JuegoCasino{
 
     protected setDescripcion():void{
         this.descripcion = this.leerArchivo();
+    }
+
+    public getDescripcion():string{
+        return this.descripcion;
     }
 
 }

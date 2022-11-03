@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var jugador_1 = require("./jugador");
+var JuegoCasino_1 = require("./JuegoCasino");
+var casino_1 = require("./casino");
+var miCasino = new casino_1.Casino();
+var miJuego = new JuegoCasino_1.JuegoCasino("Tragamonedas");
+var Participante = new jugador_1.Jugador("German", 500);
+miCasino.agergarJuegos(miJuego);
+miCasino.ingresoJugador(Participante);
+miJuego.getDescripcion();

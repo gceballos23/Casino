@@ -1,7 +1,7 @@
 import { Jugador } from "./jugador";
 import { JuegoCasino } from "./JuegoCasino";
 
-export class Casino{
+export class Casino {
     protected bienvenida : string;
     protected juegos: JuegoCasino[];
     protected jugadores : Jugador[];
@@ -20,19 +20,50 @@ export class Casino{
         return this.juegos;
     }
 
-    public agergarJuegos():void{
-
+    public getJuego(indice: number):JuegoCasino{
+        return this.juegos[indice]
     }
 
-    public eliminarJUegos(pJuego:JuegoCasino):void{
+    public agergarJuegos(pJuego : JuegoCasino):void{
+        this.juegos.push(pJuego);
+        console.log("se agrego el siguiente Juego :" + pJuego.getNombre())
+    }
 
+    public eliminarJuegos(pJuego:JuegoCasino):void{
+        let control : number = 0;
+        for(let i:number=0; i<this.juegos.length; i++){
+            if(pJuego.getNombre() === this.juegos[i].getNombre()){ 
+                this.juegos.splice(i,1);
+                console.log("Se Elimino el siguiente Juego del Casino: " + pJuego);
+                control = 1;
+                break;
+            }
+        }
+        
+        if (control === 0){
+                throw new Error('No se encontro Juego');
+         }
+            
     }
 
     public ingresoJugador(pJugador: Jugador):void{
-
+        this.jugadores.push(pJugador);
+        console.log(pJugador.getNombre() + "/n" + this.bienvenida );
     }
 
-    public salidaJugador(pJUgador: Jugador):void{
+    public salidaJugador(pJugador: Jugador):void{
+        let control : number = 0;
+        for(let i:number=0; i<this.jugadores.length; i++){
+            if(pJugador.getNombre() === this.jugadores[i].getNombre()){ 
+                this.jugadores.splice(i,1);
+                console.log("Se Retiro el siguiente Jugador Casino: " + pJugador);
+                control = 1;
+                break;
+            }
+        }
         
+        if (control === 0){
+                throw new Error('No se encontro Jugador en el Casino');
+         }            
     }
 }
