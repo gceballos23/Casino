@@ -12,4 +12,4 @@ GANANCIAS:
 3 Bar = 30 * APUESTA
 3 Pera = 40 * APUESTA
 3 Bananas = 50 * APUESTA
-3 Cerezas = POZO
+3 Cerezas = 60 * APUESTA
