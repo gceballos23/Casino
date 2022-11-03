@@ -1,22 +1,40 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 exports.__esModule = true;
 exports.Tragamoneda = void 0;
-var Tragamoneda = /** @class */ (function () {
-    function Tragamoneda(ptipoSlot, pCantidadSlot, pPozoTotal) {
-        this.tipoSlot = ptipoSlot;
-        this.cantidadSlot = pCantidadSlot;
-        /* se carga la cantidad de slot */
-        /* this.cargarSlot(); */
-        this.slots = [];
-        this.ultimaJugada = [];
-        this.historialJugadas = [];
-        this.dineroIngresado = 0;
-        this.pozoTotal = pPozoTotal;
+var JuegoCasino_1 = require("./JuegoCasino");
+var Tragamoneda = /** @class */ (function (_super) {
+    __extends(Tragamoneda, _super);
+    function Tragamoneda(pNOmbre, ptipoSlot, pCantidadSlot) {
+        var _this = _super.call(this, pNOmbre) || this;
+        _this.tipoSlot = ptipoSlot;
+        _this.cantidadSlot = pCantidadSlot;
+        _this.slots = [];
+        _this.ultimaJugada = [];
+        _this.dineroIngresado = 0;
+        //    this.pozoTotal= pPozoTotal;
+        //    this.jugadaPozoTotal = [];
         /* this.setJugadaPozoTotal(); */
-        this.jugadaPozoTotal = [];
-        this.apuestaMinima = 1;
-        this.apuesta = this.apuestaMinima;
-        this.premio = 0;
+        _this.apuestaMinima = 1;
+        _this.apuesta = _this.apuestaMinima;
+        _this.premio = 0;
+        /* se carga la cantidad de slot */ 0;
+        _this.cargarSlot();
+        return _this;
     }
     Tragamoneda.prototype.getCantidadSlot = function () {
         return this.cantidadSlot;
@@ -26,9 +44,9 @@ var Tragamoneda = /** @class */ (function () {
             this.slots.push(this.tipoSlot);
             this.slots[i].girarSlots();
         }
-        this.setJugadaPozoTotal();
+        //        this.setJugadaPozoTotal();
     };
-    Tragamoneda.prototype.UltimaJugada = function () {
+    Tragamoneda.prototype.getUltimaJugada = function () {
         return this.ultimaJugada;
     };
     Tragamoneda.prototype.setUltimaJugada = function () {
@@ -47,12 +65,13 @@ var Tragamoneda = /** @class */ (function () {
     Tragamoneda.prototype.restarDineroIngresado = function () {
         this.dineroIngresado = this.dineroIngresado - this.apuesta;
     };
-    Tragamoneda.prototype.getPozoTotal = function () {
-        return this.pozoTotal;
-    };
-    Tragamoneda.prototype.incrementarPozoTotal = function () {
-        this.pozoTotal = this.pozoTotal + this.apuesta;
-    };
+    /*  public getPozoTotal(): number{
+          return this.pozoTotal;
+      }
+  
+      protected incrementarPozoTotal():void{
+          this.pozoTotal = this.pozoTotal + this.apuesta;
+      }*/
     Tragamoneda.prototype.setApuesta = function (pOpciones) {
         switch (pOpciones) {
             case 2:
@@ -70,7 +89,8 @@ var Tragamoneda = /** @class */ (function () {
     };
     Tragamoneda.prototype.probabilidadGanar = function () {
         /* probalidad de 1 en 20 */
-        var probabilidad = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1];
+        /* let probabilidad : number[]=[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1]*/
+        var probabilidad = [1, 1, 0, 1, 1];
         if (probabilidad[Math.floor(Math.random() * probabilidad.length)] === 0) {
             return true;
         }
@@ -78,30 +98,35 @@ var Tragamoneda = /** @class */ (function () {
             return false;
         }
     };
-    Tragamoneda.prototype.getHistorialJugada = function () {
-        return this.historialJugadas;
-    };
-    Tragamoneda.prototype.setHistorialJugadas = function () {
-        for (var i = 0; i < this.cantidadSlot; i++) {
-            this.historialJugadas.push(this.slots[i].getUltimaJugadaSola());
+    /*
+        public getHistorialJugada():string[]{
+            return  this.historialJugadas;
         }
-    };
-    Tragamoneda.prototype.getJugadaPozoTotal = function () {
-        return this.jugadaPozoTotal;
-    };
-    Tragamoneda.prototype.setJugadaPozoTotal = function () {
-        for (var i = 0; i < this.cantidadSlot; i++) {
-            this.jugadaPozoTotal.push(this.slots[i].getFiguraMayor());
+    
+        protected setHistorialJugadas():void{
+            for( let i:number = 0; i< this.cantidadSlot ; i++){
+                this.historialJugadas.push(this.slots[i].getUltimaJugadaSola());
+            }
         }
-    };
-    Tragamoneda.prototype.GanarPozo = function () {
-        if (this.jugadaPozoTotal = this.ultimaJugada) {
-            return true;
+    
+        protected getJugadaPozoTotal():string[]{
+            return this.jugadaPozoTotal
         }
-        else {
-            return false;
+    
+        protected setJugadaPozoTotal():void{
+            for( let i:number = 0; i< this.cantidadSlot  ; i++){
+                this.jugadaPozoTotal.push(this.slots[i].getFiguraMayor());
+            }
         }
-    };
+    
+        protected GanarPozo():boolean{
+            if (this.jugadaPozoTotal = this.ultimaJugada) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+    */
     Tragamoneda.prototype.SaberSiEsJugadaGanadora = function () {
         var ganadora = false;
         for (var i = 0; i < this.cantidadSlot - 1; i++) {
@@ -121,13 +146,15 @@ var Tragamoneda = /** @class */ (function () {
     Tragamoneda.prototype.getPremio = function () {
         return this.premio;
     };
-    Tragamoneda.prototype.resetPremioPozo = function () {
-        this.pozoTotal = 100;
-    };
+    /*
+        protected resetPremioPozo():void{
+            this.pozoTotal = 100;
+        }
+    */
     Tragamoneda.prototype.calcularPremio = function () {
         return this.apuesta * (this.slots[0].getposicion() + 1) * 10;
     };
-    Tragamoneda.prototype.TirarPalanca = function () {
+    Tragamoneda.prototype.jugar = function () {
         var control = 0;
         while (control < 1) {
             this.setUltimaJugada();
@@ -135,23 +162,30 @@ var Tragamoneda = /** @class */ (function () {
                 control = 1;
             }
         }
-        this.setHistorialJugadas();
+        //        this.setHistorialJugadas();
+        /*        if (this.SaberSiEsJugadaGanadora()){
+                    if (this.GanarPozo()){
+                        this.setPremio(this.getPozoTotal())
+                        this.IngresarDinero(this.getPremio());
+                        this.resetPremioPozo();
+        
+                    }else{
+                        this.setPremio(this.calcularPremio())
+                        this.IngresarDinero(this.getPremio());
+                        this.incrementarPozoTotal();
+                    }
+                } else {
+                    this.restarDineroIngresado();
+                }
+        */
         if (this.SaberSiEsJugadaGanadora()) {
-            if (this.GanarPozo()) {
-                this.setPremio(this.getPozoTotal());
-                this.IngresarDinero(this.getPremio());
-                this.resetPremioPozo();
-            }
-            else {
-                this.setPremio(this.calcularPremio());
-                this.IngresarDinero(this.getPremio());
-                this.incrementarPozoTotal();
-            }
+            this.setPremio(this.calcularPremio());
+            this.IngresarDinero(this.getPremio());
         }
         else {
             this.restarDineroIngresado();
         }
     };
     return Tragamoneda;
-}());
+}(JuegoCasino_1.JuegoCasino));
 exports.Tragamoneda = Tragamoneda;

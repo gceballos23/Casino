@@ -1,33 +1,34 @@
 import { Slot } from "./slot";
+import { JuegoCasino } from "./JuegoCasino";
 
-export class Tragamoneda{
+export class Tragamoneda extends JuegoCasino {
     protected tipoSlot : Slot;
     protected cantidadSlot: number;
     protected slots: Slot[];
     protected ultimaJugada: string[];
-    protected historialJugadas : string[];
+//    protected historialJugadas : string[];
     protected dineroIngresado: number;
-    protected pozoTotal: number;
-    protected jugadaPozoTotal : string[];
+//    protected pozoTotal: number;
+//    protected jugadaPozoTotal : string[];
     protected apuestaMinima : number;
     protected apuesta:number;
     protected premio : number;
 
-    constructor(ptipoSlot:Slot, pCantidadSlot:number,pPozoTotal:number){
+    constructor(pNOmbre: string,ptipoSlot:Slot, pCantidadSlot:number){
+        super(pNOmbre);
         this.tipoSlot = ptipoSlot;
         this.cantidadSlot = pCantidadSlot;
-        /* se carga la cantidad de slot */
-       /* this.cargarSlot(); */
-       this.slots = [];
+        this.slots = [];
         this.ultimaJugada=[];
-        this.historialJugadas=[];
         this.dineroIngresado=0;
-        this.pozoTotal= pPozoTotal;
-        /* this.setJugadaPozoTotal(); */
-        this.jugadaPozoTotal = [];
+    //    this.pozoTotal= pPozoTotal;
+    //    this.jugadaPozoTotal = [];
+     /* this.setJugadaPozoTotal(); */    
         this.apuestaMinima = 1;
         this.apuesta = this.apuestaMinima;
         this.premio= 0;
+        /* se carga la cantidad de slot */0
+        this.cargarSlot(); 
     
     }
 
@@ -40,10 +41,10 @@ export class Tragamoneda{
             this.slots.push(this.tipoSlot);
             this.slots[i].girarSlots();
         }      
-        this.setJugadaPozoTotal();
+//        this.setJugadaPozoTotal();
     }
 
-    public UltimaJugada():string[]{
+    public getUltimaJugada():string[]{
         return this.ultimaJugada;
     }
 
@@ -60,7 +61,7 @@ export class Tragamoneda{
         return this.dineroIngresado;
     }
 
-    public IngresarDinero(pCantidad):void{
+    public IngresarDinero(pCantidad :number):void{
         this.dineroIngresado = this.dineroIngresado + pCantidad;
     }
 
@@ -68,13 +69,13 @@ export class Tragamoneda{
         this.dineroIngresado = this.dineroIngresado - this.apuesta;
     }
 
-    public getPozoTotal(): number{
+  /*  public getPozoTotal(): number{
         return this.pozoTotal;
-    }
+    } 
 
     protected incrementarPozoTotal():void{
         this.pozoTotal = this.pozoTotal + this.apuesta;
-    }
+    }*/
 
     public setApuesta(pOpciones):void{
         switch(pOpciones) {
@@ -95,14 +96,15 @@ export class Tragamoneda{
 
     protected probabilidadGanar():boolean{
         /* probalidad de 1 en 20 */
-        let probabilidad : number[]=[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1]
-        if  (probabilidad[Math.floor(Math.random() * probabilidad.length)] === 0){
+       /* let probabilidad : number[]=[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1]*/
+       let probabilidad : number[]=[1,1,0,1,1] 
+       if  (probabilidad[Math.floor(Math.random() * probabilidad.length)] === 0){
             return true;
         }else{
             return false;
         } 
     }
-
+/*
     public getHistorialJugada():string[]{
         return  this.historialJugadas;
     }
@@ -130,7 +132,7 @@ export class Tragamoneda{
             return false;
         }
     }
-
+*/
     protected SaberSiEsJugadaGanadora():boolean{
         let ganadora : boolean = false;
         
@@ -154,17 +156,17 @@ export class Tragamoneda{
     public getPremio():number{
         return this.premio;
     }
-
+/*
     protected resetPremioPozo():void{
         this.pozoTotal = 100;
     }
-
+*/
 
     protected calcularPremio():number{
         return this.apuesta *  (this.slots[0].getposicion() + 1) * 10;
     }
 
-    public TirarPalanca():void{
+    public jugar():void{
         let control :number = 0;
         while (control < 1 ) {    
             this.setUltimaJugada();          
@@ -174,9 +176,9 @@ export class Tragamoneda{
 
         }
 
-        this.setHistorialJugadas();
+//        this.setHistorialJugadas();
 
-        if (this.SaberSiEsJugadaGanadora()){
+/*        if (this.SaberSiEsJugadaGanadora()){
             if (this.GanarPozo()){
                 this.setPremio(this.getPozoTotal())
                 this.IngresarDinero(this.getPremio());
@@ -187,6 +189,15 @@ export class Tragamoneda{
                 this.IngresarDinero(this.getPremio());
                 this.incrementarPozoTotal();
             }
+        } else {
+            this.restarDineroIngresado();
+        }
+*/
+        if (this.SaberSiEsJugadaGanadora()){
+     
+                this.setPremio(this.calcularPremio())
+                this.IngresarDinero(this.getPremio());
+  
         } else {
             this.restarDineroIngresado();
         }

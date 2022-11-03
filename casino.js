@@ -36,7 +36,8 @@ var Casino = /** @class */ (function () {
     };
     Casino.prototype.ingresoJugador = function (pJugador) {
         this.jugadores.push(pJugador);
-        console.log(pJugador.getNombre() + "/n" + this.bienvenida);
+        console.log(pJugador.getNombre());
+        console.log(this.bienvenida);
     };
     Casino.prototype.salidaJugador = function (pJugador) {
         var control = 0;
@@ -51,6 +52,9 @@ var Casino = /** @class */ (function () {
         if (control === 0) {
             throw new Error('No se encontro Jugador en el Casino');
         }
+    };
+    Casino.prototype.getjugador = function (pIndice) {
+        return this.jugadores[pIndice];
     };
     return Casino;
 }());

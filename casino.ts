@@ -48,7 +48,8 @@ export class Casino {
 
     public ingresoJugador(pJugador: Jugador):void{
         this.jugadores.push(pJugador);
-        console.log(pJugador.getNombre() + "/n" + this.bienvenida );
+        console.log(pJugador.getNombre());
+        console.log(this.bienvenida );
     }
 
     public salidaJugador(pJugador: Jugador):void{
@@ -65,5 +66,9 @@ export class Casino {
         if (control === 0){
                 throw new Error('No se encontro Jugador en el Casino');
          }            
+    }
+
+    public getjugador(pIndice : number): Jugador{
+        return this.jugadores[pIndice];
     }
 }

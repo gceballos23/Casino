@@ -5,8 +5,8 @@ var fs = require("fs");
 var JuegoCasino = /** @class */ (function () {
     function JuegoCasino(pNombre) {
         this.nombre = pNombre;
-        this.archivo = "./" + pNombre + ".txt";
-        this.descripcion = this.leerArchivo();
+        this.descripcion = "";
+        this.setDescripcion();
     }
     JuegoCasino.prototype.getNombre = function () {
         return this.nombre;
@@ -17,11 +17,11 @@ var JuegoCasino = /** @class */ (function () {
     JuegoCasino.prototype.leerArchivo = function () {
         var contenidoArchivo;
         try {
-            contenidoArchivo = fs.readFileSync(this.archivo, 'utf8');
+            contenidoArchivo = fs.readFileSync("./" + this.nombre + ".txt", 'utf8');
         }
         catch (error) {
-            fs.writeFileSync(this.archivo, this.nombre, 'utf8');
-            contenidoArchivo = fs.readFileSync(this.archivo, 'utf8');
+            fs.writeFileSync("./" + this.nombre + ".txt", this.nombre, 'utf8');
+            contenidoArchivo = fs.readFileSync("./" + this.nombre + ".txt", 'utf8');
         }
         return contenidoArchivo;
     };
