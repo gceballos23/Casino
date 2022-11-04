@@ -49,9 +49,6 @@ var JugadorTragamonedas = /** @class */ (function (_super) {
         while ((seguirJugando === 1) && (this.maquina.getDineroIngesado() > 0)) {
             if (this.maquina.getApuesta() <= this.maquina.getDineroIngesado()) {
                 this.maquina.jugar();
-                console.log(this.maquina.getUltimaJugada());
-                console.log("Premio: " + this.maquina.getPremio());
-                console.log("Dinero: " + this.maquina.getDineroIngesado());
             }
             else {
                 console.log("La apuesta es mayor a dinero que tiene!!");
@@ -69,6 +66,8 @@ var JugadorTragamonedas = /** @class */ (function (_super) {
         }
         console.log("Dinero a retirar: " + this.maquina.getDineroIngesado());
         this.setDinero(this.maquina.getDineroIngesado());
+        this.maquina.IngresarDinero(-this.maquina.getDineroIngesado());
+        console.log("Dinero en maquina: " + this.maquina.getDineroIngesado());
     };
     return JugadorTragamonedas;
 }(jugador_1.Jugador));

@@ -1,15 +1,12 @@
 import { Slot } from "./slot";
 import { JuegoCasino } from "./JuegoCasino";
 
-export class Tragamoneda extends JuegoCasino {
+export class Tragamoneda3 extends JuegoCasino {
     protected tipoSlot : Slot;
     protected cantidadSlot: number;
     protected slots: Slot[];
     protected ultimaJugada: string[];
-//    protected historialJugadas : string[];
     protected dineroIngresado: number;
-//    protected pozoTotal: number;
-//    protected jugadaPozoTotal : string[];
     protected apuestaMinima : number;
     protected apuesta:number;
     protected premio : number;
@@ -21,13 +18,10 @@ export class Tragamoneda extends JuegoCasino {
         this.slots = [];
         this.ultimaJugada=[];
         this.dineroIngresado=0;
-    //    this.pozoTotal= pPozoTotal;
-    //    this.jugadaPozoTotal = [];
-     /* this.setJugadaPozoTotal(); */    
         this.apuestaMinima = 1;
         this.apuesta = this.apuestaMinima;
         this.premio= 0;
-        /* se carga la cantidad de slot */0
+        /* se carga la cantidad de slot */
         this.cargarSlot(); 
     
     }
@@ -41,7 +35,6 @@ export class Tragamoneda extends JuegoCasino {
             this.slots.push(this.tipoSlot);
             this.slots[i].girarSlots();
         }      
-//        this.setJugadaPozoTotal();
     }
 
     public getUltimaJugada():string[]{
@@ -69,14 +62,6 @@ export class Tragamoneda extends JuegoCasino {
         this.dineroIngresado = this.dineroIngresado - this.apuesta;
     }
 
-  /*  public getPozoTotal(): number{
-        return this.pozoTotal;
-    } 
-
-    protected incrementarPozoTotal():void{
-        this.pozoTotal = this.pozoTotal + this.apuesta;
-    }*/
-
     public setApuesta(pOpciones):void{
         switch(pOpciones) {
             case 2:
@@ -95,8 +80,7 @@ export class Tragamoneda extends JuegoCasino {
     }
 
     protected probabilidadGanar():boolean{
-        /* probalidad de 1 en 20 */
-       /* let probabilidad : number[]=[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1]*/
+        /* probalidad de 1 en 5 */
        let probabilidad : number[]=[1,1,0,1,1] 
        if  (probabilidad[Math.floor(Math.random() * probabilidad.length)] === 0){
             return true;
@@ -113,24 +97,6 @@ export class Tragamoneda extends JuegoCasino {
         for( let i:number = 0; i< this.cantidadSlot ; i++){
             this.historialJugadas.push(this.slots[i].getUltimaJugadaSola());
         }  
-    }
-
-    protected getJugadaPozoTotal():string[]{
-        return this.jugadaPozoTotal
-    }
-
-    protected setJugadaPozoTotal():void{
-        for( let i:number = 0; i< this.cantidadSlot  ; i++){
-            this.jugadaPozoTotal.push(this.slots[i].getFiguraMayor());
-        }  
-    }
-
-    protected GanarPozo():boolean{
-        if (this.jugadaPozoTotal = this.ultimaJugada) {
-            return true;
-        }else{
-            return false;
-        }
     }
 */
     protected SaberSiEsJugadaGanadora():boolean{
@@ -156,21 +122,16 @@ export class Tragamoneda extends JuegoCasino {
     public getPremio():number{
         return this.premio;
     }
-/*
-    protected resetPremioPozo():void{
-        this.pozoTotal = 100;
-    }
-*/
-
     protected calcularPremio():number{
         return this.apuesta *  (this.slots[0].getposicion() + 1) * 10;
     }
 
     public jugar():void{
         let control :number = 0;
+        let jugadaGanadora = this.probabilidadGanar();
         while (control < 1 ) {    
             this.setUltimaJugada();          
-            if ( this.probabilidadGanar() === this.SaberSiEsJugadaGanadora() ) {
+            if ( jugadaGanadora === this.SaberSiEsJugadaGanadora() ) {
                 control = 1;
             }
 
@@ -178,29 +139,20 @@ export class Tragamoneda extends JuegoCasino {
 
 //        this.setHistorialJugadas();
 
-/*        if (this.SaberSiEsJugadaGanadora()){
-            if (this.GanarPozo()){
-                this.setPremio(this.getPozoTotal())
-                this.IngresarDinero(this.getPremio());
-                this.resetPremioPozo();
-
-            }else{
-                this.setPremio(this.calcularPremio())
-                this.IngresarDinero(this.getPremio());
-                this.incrementarPozoTotal();
-            }
-        } else {
-            this.restarDineroIngresado();
-        }
-*/
         if (this.SaberSiEsJugadaGanadora()){
      
                 this.setPremio(this.calcularPremio())
                 this.IngresarDinero(this.getPremio());
+                
   
         } else {
             this.restarDineroIngresado();
         }
+
+        console.log(this.getUltimaJugada());
+        console.log("Premio: " + this.getPremio())
+        console.log("Dinero: " + this.getDineroIngesado());
+        this.setPremio(0);
 
     }
 

@@ -3,7 +3,7 @@ exports.__esModule = true;
 exports.Casino = void 0;
 var Casino = /** @class */ (function () {
     function Casino() {
-        this.bienvenida = "Bienvenido al Casino : VITO CORLEONE";
+        this.bienvenida = "Bienvenido al Casino - VITO CORLEONE -";
         this.juegos = [];
         this.jugadores = [];
     }
@@ -18,7 +18,6 @@ var Casino = /** @class */ (function () {
     };
     Casino.prototype.agergarJuegos = function (pJuego) {
         this.juegos.push(pJuego);
-        console.log("se agrego el siguiente Juego :" + pJuego.getNombre());
     };
     Casino.prototype.eliminarJuegos = function (pJuego) {
         var control = 0;
@@ -36,8 +35,7 @@ var Casino = /** @class */ (function () {
     };
     Casino.prototype.ingresoJugador = function (pJugador) {
         this.jugadores.push(pJugador);
-        console.log(pJugador.getNombre());
-        console.log(this.bienvenida);
+        console.log(this.bienvenida + " " + pJugador.getNombre());
     };
     Casino.prototype.salidaJugador = function (pJugador) {
         var control = 0;

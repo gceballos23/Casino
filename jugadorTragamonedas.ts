@@ -1,21 +1,20 @@
 import { Jugador } from "./jugador";
-import { Tragamoneda } from "./tragamonedas";
+import { Tragamoneda3 } from "./tragamonedas3";
 import * as ReadlineSync from "readline-sync";
-import { JuegoCasino } from "./JuegoCasino";
 
 export class JugadorTragamonedas extends Jugador{
-    protected maquina : Tragamoneda;
+    protected maquina : Tragamoneda3;
     
-    constructor(pNombre: string, pMaquina:Tragamoneda, pDinero:number){
+    constructor(pNombre: string, pMaquina:Tragamoneda3, pDinero:number){
         super(pNombre,pDinero);
         this.maquina = pMaquina;
     }
 
-    public getMaquina():Tragamoneda{
+    public getMaquina():Tragamoneda3{
         return this.maquina;
     }
 
-    public setMaquina(pMaquina: Tragamoneda):void{
+    public setMaquina(pMaquina: Tragamoneda3):void{
         this.maquina = pMaquina;
     }
 
@@ -42,9 +41,6 @@ export class JugadorTragamonedas extends Jugador{
         while ((seguirJugando === 1)&&(this.maquina.getDineroIngesado()>0)){
             if (this.maquina.getApuesta() <= this.maquina.getDineroIngesado()){
                 this.maquina.jugar();
-                console.log(this.maquina.getUltimaJugada());
-                console.log("Premio: " + this.maquina.getPremio())
-                console.log("Dinero: " + this.maquina.getDineroIngesado());
              
             } else {
                console.log("La apuesta es mayor a dinero que tiene!!") 
@@ -63,10 +59,11 @@ export class JugadorTragamonedas extends Jugador{
             }
         }
         
-        console.log("Dinero a retirar: " + this.maquina.getDineroIngesado())
+        console.log("Dinero a retirar: " + this.maquina.getDineroIngesado());
 
-        this.setDinero(this.maquina.getDineroIngesado())
-
+        this.setDinero(this.maquina.getDineroIngesado());
+        this.maquina.IngresarDinero(-this.maquina.getDineroIngesado());
+        console.log("Dinero en maquina: " + this.maquina.getDineroIngesado());
 
     }
 

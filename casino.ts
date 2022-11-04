@@ -7,7 +7,7 @@ export class Casino {
     protected jugadores : Jugador[];
 
     constructor (){
-        this.bienvenida = "Bienvenido al Casino : VITO CORLEONE";
+        this.bienvenida = "Bienvenido al Casino - VITO CORLEONE -";
         this.juegos = [];
         this.jugadores = [];
     }
@@ -26,7 +26,6 @@ export class Casino {
 
     public agergarJuegos(pJuego : JuegoCasino):void{
         this.juegos.push(pJuego);
-        console.log("se agrego el siguiente Juego :" + pJuego.getNombre())
     }
 
     public eliminarJuegos(pJuego:JuegoCasino):void{
@@ -48,8 +47,7 @@ export class Casino {
 
     public ingresoJugador(pJugador: Jugador):void{
         this.jugadores.push(pJugador);
-        console.log(pJugador.getNombre());
-        console.log(this.bienvenida );
+        console.log(this.bienvenida + " " + pJugador.getNombre());
     }
 
     public salidaJugador(pJugador: Jugador):void{
