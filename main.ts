@@ -14,7 +14,7 @@ let maquinaClasica = new Tragamoneda3("Tragamonedas Clasica", new Slot(["Naranja
 let maquinaAvanzada = new Tragamoneda5("Tragamonedas Avanzada", new Slot(["Naranja","Siete","BarBar","Pera","Banana","Cerezas"]), 5,20000);
 miCasino.agergarJuegos(maquinaClasica);
 miCasino.agergarJuegos(maquinaAvanzada);
-miCasino.ingresoJugador(new Jugador("German", 500));
+miCasino.ingresoJugador(new Jugador("German", 0));
 console.log(" ");
 
 opciones = Number(input.question("TRAGAMONEDAS 3 SLOTS: 1 - TRAGAMONEDAS 5 SLOTS : 2 - BLACKJACK: 3 - DADOS: 4 - 0 SALIR- "));
@@ -23,7 +23,7 @@ opciones = Number(input.question("TRAGAMONEDAS 3 SLOTS: 1 - TRAGAMONEDAS 5 SLOTS
 while (opciones > 0){
     switch(opciones) {
         case 1:
-            let jugadorTM = new JugadorTragamonedas(miCasino.getjugador(0).getNombre(),maquinaClasica,1000);
+            let jugadorTM = new JugadorTragamonedas(miCasino.getjugador(0).getNombre(),maquinaClasica,0);
             console.log(" ");
             console.log(miCasino.getJuego(opciones-1).getDescripcion());
             console.log(" ");
@@ -31,7 +31,7 @@ while (opciones > 0){
 
           break;
           case 2:
-            let jugadorTM2 = new JugadorTragamonedas(miCasino.getjugador(0).getNombre(),maquinaAvanzada,1000);
+            let jugadorTM2 = new JugadorTragamonedas(miCasino.getjugador(0).getNombre(),maquinaAvanzada,0);
             console.log(" ");
             console.log(miCasino.getJuego(opciones-1).getDescripcion());
             console.log(" ");
@@ -54,7 +54,7 @@ while (opciones > 0){
     }
 
     if  (opciones === 0) {
-        console.log("Gracias por querer jugar");
+        console.log("Gracias por  jugar!!!");
         break;
     }
 }

@@ -92,10 +92,6 @@ export class Tragamoneda3 extends JuegoCasino {
     protected setHistorialJugadas(pPremio:number):void{
         let historial : string = this.leerArchivo(this.nombre+"-historial.txt");
         historial = historial + "\n"; 
- /*       for( let i:number = 0; i< this.cantidadSlot ; i++){
-           historial = historial + this.slots[i].getUltimaJugadaSola()+ ",";
-        }
-*/
         historial = historial + this.getUltimaJugada() + ",";
         historial = historial + pPremio;
 

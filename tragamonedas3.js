@@ -89,10 +89,6 @@ var Tragamoneda3 = /** @class */ (function (_super) {
     Tragamoneda3.prototype.setHistorialJugadas = function (pPremio) {
         var historial = this.leerArchivo(this.nombre + "-historial.txt");
         historial = historial + "\n";
-        /*       for( let i:number = 0; i< this.cantidadSlot ; i++){
-                  historial = historial + this.slots[i].getUltimaJugadaSola()+ ",";
-               }
-       */
         historial = historial + this.getUltimaJugada() + ",";
         historial = historial + pPremio;
         this.GuardarArchivo(this.nombre + "-historial.txt", historial);

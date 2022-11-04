@@ -10,3 +10,14 @@ Banana,Naranja,Naranja,BarBar,Banana,0
 Banana,Cerezas,Cerezas,Cerezas,Siete,0
 Siete,Cerezas,Pera,BarBar,Naranja,0
 BarBar,BarBar,BarBar,BarBar,BarBar,20000
+Pera,Naranja,Naranja,Naranja,BarBar,0
+Siete,Naranja,Cerezas,Naranja,Cerezas,0
+Cerezas,Pera,Cerezas,BarBar,Naranja,0
+Naranja,Naranja,Banana,Naranja,Pera,0
+Naranja,Banana,BarBar,Naranja,BarBar,0
+Pera,BarBar,Banana,Siete,Naranja,0
+Naranja,Pera,Pera,Cerezas,Banana,0
+Pera,Banana,Banana,Pera,BarBar,0
+Naranja,BarBar,Banana,BarBar,Banana,0
+Banana,Pera,BarBar,Pera,Banana,0
+Cerezas,Siete,Siete,BarBar,BarBar,0
