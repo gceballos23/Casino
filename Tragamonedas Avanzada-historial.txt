@@ -1,0 +1,12 @@
+Tragamonedas Avanzada
+Cerezas,Naranja,Banana,BarBar,Siete,0
+Siete,Siete,Cerezas,Naranja,BarBar,0
+Banana,BarBar,Banana,Naranja,Cerezas,0
+Banana,Banana,Banana,Siete,Naranja,0
+Banana,Siete,Pera,Cerezas,Siete,0
+Siete,Pera,Banana,Pera,Banana,0
+Cerezas,Naranja,BarBar,Banana,Naranja,0
+Banana,Naranja,Naranja,BarBar,Banana,0
+Banana,Cerezas,Cerezas,Cerezas,Siete,0
+Siete,Cerezas,Pera,BarBar,Naranja,0
+BarBar,BarBar,BarBar,BarBar,BarBar,20000

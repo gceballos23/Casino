@@ -67,7 +67,7 @@ var JugadorTragamonedas = /** @class */ (function (_super) {
         console.log("Dinero a retirar: " + this.maquina.getDineroIngesado());
         this.setDinero(this.maquina.getDineroIngesado());
         this.maquina.IngresarDinero(-this.maquina.getDineroIngesado());
-        console.log("Dinero en maquina: " + this.maquina.getDineroIngesado());
+        console.log("Dinero Disponible: " + this.getDinero());
     };
     return JugadorTragamonedas;
 }(jugador_1.Jugador));

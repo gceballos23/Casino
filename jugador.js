@@ -16,7 +16,7 @@ var Jugador = /** @class */ (function () {
         return this.dinero;
     };
     Jugador.prototype.setDinero = function (pDinero) {
-        this.dinero = pDinero;
+        this.dinero = this.dinero + pDinero;
     };
     return Jugador;
 }());

@@ -20,6 +20,6 @@ export class Jugador{
     }
 
     public setDinero(pDinero: number):void{
-        this.dinero = pDinero;
+        this.dinero = this.dinero + pDinero;
     }
 }

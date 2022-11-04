@@ -14,19 +14,22 @@ var JuegoCasino = /** @class */ (function () {
     JuegoCasino.prototype.setNombre = function (pNombre) {
         this.nombre = pNombre;
     };
-    JuegoCasino.prototype.leerArchivo = function () {
+    JuegoCasino.prototype.leerArchivo = function (pArchivo) {
         var contenidoArchivo;
         try {
-            contenidoArchivo = fs.readFileSync("./" + this.nombre + ".txt", 'utf8');
+            contenidoArchivo = fs.readFileSync("./" + pArchivo, 'utf8');
         }
         catch (error) {
-            fs.writeFileSync("./" + this.nombre + ".txt", this.nombre, 'utf8');
-            contenidoArchivo = fs.readFileSync("./" + this.nombre + ".txt", 'utf8');
+            fs.writeFileSync("./" + pArchivo, this.nombre, 'utf8');
+            contenidoArchivo = fs.readFileSync("./" + pArchivo, 'utf8');
         }
         return contenidoArchivo;
     };
+    JuegoCasino.prototype.GuardarArchivo = function (pArchivo, pContenido) {
+        fs.writeFileSync("./" + pArchivo, pContenido, 'utf8');
+    };
     JuegoCasino.prototype.setDescripcion = function () {
-        this.descripcion = this.leerArchivo();
+        this.descripcion = this.leerArchivo(this.nombre + ".txt");
     };
     JuegoCasino.prototype.getDescripcion = function () {
         return this.descripcion;

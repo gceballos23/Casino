@@ -1,0 +1,25 @@
+Tragamonedas Clasica
+
+BarBar,BarBar,BarBar,30
+Cerezas,Banana,Banana,0
+Cerezas,Naranja,Cerezas,0
+Naranja,Pera,Siete,0
+Siete,Pera,Naranja,0
+Naranja,Pera,Pera,0
+Pera,Pera,Pera,120
+Banana,Naranja,Siete,0
+Cerezas,BarBar,Naranja,0
+BarBar,BarBar,BarBar,90
+BarBar,BarBar,BarBar,90
+Siete,Siete,Siete,60
+Naranja,Naranja,Pera,0
+Pera,Banana,BarBar,0
+Banana,Siete,BarBar,0
+Naranja,Naranja,Siete,0
+Cerezas,Banana,BarBar,0
+BarBar,Pera,BarBar,0
+Naranja,BarBar,Pera,0
+BarBar,Pera,Siete,0
+Cerezas,Naranja,BarBar,0
+Pera,BarBar,Naranja,0
+BarBar,BarBar,BarBar,90

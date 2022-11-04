@@ -87,6 +87,7 @@ export class Tragamoneda5 extends Tragamoneda3 {
             this.restarDineroIngresado();
         }
 
+        this.setHistorialJugadas(this.getPremio());
         console.log(this.getUltimaJugada());
         console.log("Premio: " + this.getPremio())
         console.log("Dinero: " + this.getDineroIngesado());

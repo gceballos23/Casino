@@ -88,17 +88,20 @@ export class Tragamoneda3 extends JuegoCasino {
             return false;
         } 
     }
-/*
-    public getHistorialJugada():string[]{
-        return  this.historialJugadas;
+
+    protected setHistorialJugadas(pPremio:number):void{
+        let historial : string = this.leerArchivo(this.nombre+"-historial.txt");
+        historial = historial + "\n"; 
+ /*       for( let i:number = 0; i< this.cantidadSlot ; i++){
+           historial = historial + this.slots[i].getUltimaJugadaSola()+ ",";
+        }
+*/
+        historial = historial + this.getUltimaJugada() + ",";
+        historial = historial + pPremio;
+
+        this.GuardarArchivo(this.nombre+"-historial.txt",historial);
     }
 
-    protected setHistorialJugadas():void{
-        for( let i:number = 0; i< this.cantidadSlot ; i++){
-            this.historialJugadas.push(this.slots[i].getUltimaJugadaSola());
-        }  
-    }
-*/
     protected SaberSiEsJugadaGanadora():boolean{
         let ganadora : boolean = false;
         
@@ -137,7 +140,7 @@ export class Tragamoneda3 extends JuegoCasino {
 
         }
 
-//        this.setHistorialJugadas();
+
 
         if (this.SaberSiEsJugadaGanadora()){
      
@@ -148,6 +151,8 @@ export class Tragamoneda3 extends JuegoCasino {
         } else {
             this.restarDineroIngresado();
         }
+
+        this.setHistorialJugadas(this.getPremio());
 
         console.log(this.getUltimaJugada());
         console.log("Premio: " + this.getPremio())

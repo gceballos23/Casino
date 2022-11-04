@@ -63,7 +63,9 @@ export class JugadorTragamonedas extends Jugador{
 
         this.setDinero(this.maquina.getDineroIngesado());
         this.maquina.IngresarDinero(-this.maquina.getDineroIngesado());
-        console.log("Dinero en maquina: " + this.maquina.getDineroIngesado());
+        
+        console.log("Dinero Disponible: " + this.getDinero());
+
 
     }
 

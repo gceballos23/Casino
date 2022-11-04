@@ -89,6 +89,7 @@ var Tragamoneda5 = /** @class */ (function (_super) {
         else {
             this.restarDineroIngresado();
         }
+        this.setHistorialJugadas(this.getPremio());
         console.log(this.getUltimaJugada());
         console.log("Premio: " + this.getPremio());
         console.log("Dinero: " + this.getDineroIngesado());

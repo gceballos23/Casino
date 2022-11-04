@@ -86,17 +86,17 @@ var Tragamoneda3 = /** @class */ (function (_super) {
             return false;
         }
     };
-    /*
-        public getHistorialJugada():string[]{
-            return  this.historialJugadas;
-        }
-    
-        protected setHistorialJugadas():void{
-            for( let i:number = 0; i< this.cantidadSlot ; i++){
-                this.historialJugadas.push(this.slots[i].getUltimaJugadaSola());
-            }
-        }
-    */
+    Tragamoneda3.prototype.setHistorialJugadas = function (pPremio) {
+        var historial = this.leerArchivo(this.nombre + "-historial.txt");
+        historial = historial + "\n";
+        /*       for( let i:number = 0; i< this.cantidadSlot ; i++){
+                  historial = historial + this.slots[i].getUltimaJugadaSola()+ ",";
+               }
+       */
+        historial = historial + this.getUltimaJugada() + ",";
+        historial = historial + pPremio;
+        this.GuardarArchivo(this.nombre + "-historial.txt", historial);
+    };
     Tragamoneda3.prototype.SaberSiEsJugadaGanadora = function () {
         var ganadora = false;
         for (var i = 0; i < this.cantidadSlot - 1; i++) {
@@ -128,7 +128,6 @@ var Tragamoneda3 = /** @class */ (function (_super) {
                 control = 1;
             }
         }
-        //        this.setHistorialJugadas();
         if (this.SaberSiEsJugadaGanadora()) {
             this.setPremio(this.calcularPremio());
             this.IngresarDinero(this.getPremio());
@@ -136,6 +135,7 @@ var Tragamoneda3 = /** @class */ (function (_super) {
         else {
             this.restarDineroIngresado();
         }
+        this.setHistorialJugadas(this.getPremio());
         console.log(this.getUltimaJugada());
         console.log("Premio: " + this.getPremio());
         console.log("Dinero: " + this.getDineroIngesado());

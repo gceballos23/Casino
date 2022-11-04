@@ -19,14 +19,14 @@ export class JuegoCasino{
         this.nombre = pNombre;
     }
 
-    protected leerArchivo():string{
+    protected leerArchivo(pArchivo : string):string{
         let contenidoArchivo : string;
         try {
-            contenidoArchivo = fs.readFileSync("./"+ this.nombre + ".txt", 'utf8');
+            contenidoArchivo = fs.readFileSync("./" + pArchivo, 'utf8');
         } catch(error) {
 
-            fs.writeFileSync("./" + this.nombre+".txt",this.nombre, 'utf8');
-            contenidoArchivo = fs.readFileSync("./" +this.nombre+".txt", 'utf8');
+            fs.writeFileSync("./" + pArchivo,this.nombre, 'utf8');
+            contenidoArchivo = fs.readFileSync("./" +pArchivo, 'utf8');
         }
         
         return contenidoArchivo;
@@ -34,8 +34,12 @@ export class JuegoCasino{
  
     }
 
+    protected GuardarArchivo(pArchivo: string, pContenido: string):void{
+        fs.writeFileSync("./" + pArchivo,pContenido, 'utf8');
+    }
+
     protected setDescripcion():void{
-        this.descripcion = this.leerArchivo();
+        this.descripcion = this.leerArchivo(this.nombre + ".txt");
     }
 
     public getDescripcion():string{
