@@ -14,7 +14,7 @@ export class Slot{
        this.UltimaJugada =this.figuras[posicion];
        this.setPosicion(posicion);
     }
-
+    /*FIGURA CON MAS PREMIO*/
     public getFiguraMayor():string{
         return this.figuras[this.figuras.length - 1]     
     }

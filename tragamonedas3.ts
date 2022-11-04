@@ -41,6 +41,7 @@ export class Tragamoneda3 extends JuegoCasino {
         return this.ultimaJugada;
     }
 
+    /* GIRA TODOS LOS SLOTS DE LA MAQUINA TRAGAMENDAS*/
     protected setUltimaJugada():void{ 
         this.ultimaJugada = [];        
         for( let i:number = 0; i < this.cantidadSlot ; i++){
@@ -62,6 +63,7 @@ export class Tragamoneda3 extends JuegoCasino {
         this.dineroIngresado = this.dineroIngresado - this.apuesta;
     }
 
+    /* CAMBIA EL MONTOA APOSTAR EN LA APUESTA*/
     public setApuesta(pOpciones):void{
         switch(pOpciones) {
             case 2:
@@ -89,6 +91,8 @@ export class Tragamoneda3 extends JuegoCasino {
         } 
     }
 
+    /* GUARDA LA JUGADA CON EL PREMIO RECIBIDO 
+        EN UN ARCHIVO TXT*/
     protected setHistorialJugadas(pPremio:number):void{
         let historial : string = this.leerArchivo(this.nombre+"-historial.txt");
         historial = historial + "\n"; 
@@ -98,6 +102,7 @@ export class Tragamoneda3 extends JuegoCasino {
         this.GuardarArchivo(this.nombre+"-historial.txt",historial);
     }
 
+    /* SABER SI LA ULTIMA JUGADA SON TODOS LOS SIMBOLOS IGUALES*/
     protected SaberSiEsJugadaGanadora():boolean{
         let ganadora : boolean = false;
         

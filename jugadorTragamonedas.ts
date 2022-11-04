@@ -18,6 +18,8 @@ export class JugadorTragamonedas extends Jugador{
         this.maquina = pMaquina;
     }
 
+    /* METODO PARA VERIFICAR LA OPCION DE SEGUIR JUGANDO 
+        SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0*/
     protected controlarOpcionNumerica(pOpcion : number): number{
         switch (pOpcion) {
             case 1:
@@ -28,6 +30,10 @@ export class JugadorTragamonedas extends Jugador{
         }
     }
 
+    /* METODO PARA SIMULAR UN MENU CON LAS OPCIONES :
+        - SEGUIR JUGANDO 
+        - INGRESO NUEVO DE DINERO
+        - CAMBIAR LA APUESTA*/
     protected menuSeguirJugando():number{
         let input = ReadlineSync;
         let opcionSeguir : number = 0;
@@ -45,7 +51,7 @@ export class JugadorTragamonedas extends Jugador{
 
         return opcionSeguir
     }
-
+    /* METODO PARA JUGAR AL TRAGAMONEDAS*/
     public jugarTragamoneda():void{     
         while ((this.menuSeguirJugando() === 1)&&(this.maquina.getDineroIngesado()>0)){
             if (this.maquina.getApuesta() <= this.maquina.getDineroIngesado()){

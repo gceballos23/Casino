@@ -24,7 +24,7 @@ export class Tragamoneda5 extends Tragamoneda3 {
     protected getJugadaPozoTotal():string[]{
         return this.jugadaPozoTotal
     }
-
+    /* DEFINIR LA JUGADA PARA GANAR EL POZO*/
     protected setJugadaPozoTotal():void{
         for( let i:number = 0; i< this.cantidadSlot  ; i++){
             this.jugadaPozoTotal.push(this.slots[i].getFiguraMayor());
