@@ -18,7 +18,7 @@ export class JugadorTragamonedas extends Jugador{
         this.maquina = pMaquina;
     }
 
-    public controlarOpcionNumerica(pOpcion : number): number{
+    protected controlarOpcionNumerica(pOpcion : number): number{
         switch (pOpcion) {
             case 1:
                 return 1;
@@ -28,7 +28,7 @@ export class JugadorTragamonedas extends Jugador{
         }
     }
 
-    public menuSeguirJugando():number{
+    protected menuSeguirJugando():number{
         let input = ReadlineSync;
         let opcionSeguir : number = 0;
         let opcionDinero : number = 0;    
@@ -45,12 +45,6 @@ export class JugadorTragamonedas extends Jugador{
 
         return opcionSeguir
     }
-
-
-
-
-
-  
 
     public jugarTragamoneda():void{     
         while ((this.menuSeguirJugando() === 1)&&(this.maquina.getDineroIngesado()>0)){

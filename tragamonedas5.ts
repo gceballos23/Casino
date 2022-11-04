@@ -43,10 +43,7 @@ export class Tragamoneda5 extends Tragamoneda3 {
         this.pozoTotal = 200;
     }
 
-    protected calcularPremio():number{
-        return this.apuesta *  (this.slots[0].getposicion() + 1) * 10;
-    }
-
+  
     protected probabilidadGanar():boolean{
         /* probalidad de 1 en 20 */
        let probabilidad : number[]=[1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1] 
@@ -57,8 +54,6 @@ export class Tragamoneda5 extends Tragamoneda3 {
         } 
     }
     
-
-
     public jugar():void{
         let control :number = 0;
         let jugadaGanadora = this.probabilidadGanar();
@@ -69,8 +64,6 @@ export class Tragamoneda5 extends Tragamoneda3 {
             }
 
         }
-
-/*        this.setHistorialJugadas(); */
 
         if (this.SaberSiEsJugadaGanadora()){
             if (this.GanarPozo()){
