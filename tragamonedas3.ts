@@ -99,7 +99,7 @@ export class Tragamoneda3 extends JuegoCasino {
         historial = historial + this.getUltimaJugada() + ",";
         historial = historial + pPremio;
 
-        this.GuardarArchivo(this.nombre+"-historial.txt",historial);
+        this.guardarArchivo(this.nombre+"-historial.txt",historial);
     }
 
     /* SABER SI LA ULTIMA JUGADA SON TODOS LOS SIMBOLOS IGUALES*/

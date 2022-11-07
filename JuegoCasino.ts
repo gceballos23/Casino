@@ -34,7 +34,7 @@ export class JuegoCasino{
  
     }
 
-    protected GuardarArchivo(pArchivo: string, pContenido: string):void{
+    protected guardarArchivo(pArchivo: string, pContenido: string):void{
         fs.writeFileSync("./" + pArchivo,pContenido, 'utf8');
     }
 
