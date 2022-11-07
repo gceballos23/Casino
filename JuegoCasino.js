@@ -25,7 +25,7 @@ var JuegoCasino = /** @class */ (function () {
         }
         return contenidoArchivo;
     };
-    JuegoCasino.prototype.GuardarArchivo = function (pArchivo, pContenido) {
+    JuegoCasino.prototype.guardarArchivo = function (pArchivo, pContenido) {
         fs.writeFileSync("./" + pArchivo, pContenido, 'utf8');
     };
     JuegoCasino.prototype.setDescripcion = function () {

@@ -31,6 +31,8 @@ var JugadorTragamonedas = /** @class */ (function (_super) {
     JugadorTragamonedas.prototype.setMaquina = function (pMaquina) {
         this.maquina = pMaquina;
     };
+    /* METODO PARA VERIFICAR LA OPCION DE SEGUIR JUGANDO
+        SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0*/
     JugadorTragamonedas.prototype.controlarOpcionNumerica = function (pOpcion) {
         switch (pOpcion) {
             case 1:
@@ -39,6 +41,10 @@ var JugadorTragamonedas = /** @class */ (function (_super) {
                 return 0;
         }
     };
+    /* METODO PARA SIMULAR UN MENU CON LAS OPCIONES :
+        - SEGUIR JUGANDO
+        - INGRESO NUEVO DE DINERO
+        - CAMBIAR LA APUESTA*/
     JugadorTragamonedas.prototype.menuSeguirJugando = function () {
         var input = ReadlineSync;
         var opcionSeguir = 0;
@@ -56,6 +62,7 @@ var JugadorTragamonedas = /** @class */ (function (_super) {
         }
         return opcionSeguir;
     };
+    /* METODO PARA JUGAR AL TRAGAMONEDAS*/
     JugadorTragamonedas.prototype.jugarTragamoneda = function () {
         while ((this.menuSeguirJugando() === 1) && (this.maquina.getDineroIngesado() > 0)) {
             if (this.maquina.getApuesta() <= this.maquina.getDineroIngesado()) {

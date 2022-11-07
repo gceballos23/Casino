@@ -45,6 +45,7 @@ var Tragamoneda3 = /** @class */ (function (_super) {
     Tragamoneda3.prototype.getUltimaJugada = function () {
         return this.ultimaJugada;
     };
+    /* GIRA TODOS LOS SLOTS DE LA MAQUINA TRAGAMENDAS*/
     Tragamoneda3.prototype.setUltimaJugada = function () {
         this.ultimaJugada = [];
         for (var i = 0; i < this.cantidadSlot; i++) {
@@ -61,6 +62,7 @@ var Tragamoneda3 = /** @class */ (function (_super) {
     Tragamoneda3.prototype.restarDineroIngresado = function () {
         this.dineroIngresado = this.dineroIngresado - this.apuesta;
     };
+    /* CAMBIA EL MONTOA APOSTAR EN LA APUESTA*/
     Tragamoneda3.prototype.setApuesta = function (pOpciones) {
         switch (pOpciones) {
             case 2:
@@ -86,13 +88,16 @@ var Tragamoneda3 = /** @class */ (function (_super) {
             return false;
         }
     };
+    /* GUARDA LA JUGADA CON EL PREMIO RECIBIDO
+        EN UN ARCHIVO TXT*/
     Tragamoneda3.prototype.setHistorialJugadas = function (pPremio) {
         var historial = this.leerArchivo(this.nombre + "-historial.txt");
         historial = historial + "\n";
         historial = historial + this.getUltimaJugada() + ",";
         historial = historial + pPremio;
-        this.GuardarArchivo(this.nombre + "-historial.txt", historial);
+        this.guardarArchivo(this.nombre + "-historial.txt", historial);
     };
+    /* SABER SI LA ULTIMA JUGADA SON TODOS LOS SIMBOLOS IGUALES*/
     Tragamoneda3.prototype.SaberSiEsJugadaGanadora = function () {
         var ganadora = false;
         for (var i = 0; i < this.cantidadSlot - 1; i++) {

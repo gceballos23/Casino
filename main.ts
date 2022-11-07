@@ -4,6 +4,10 @@ import { Casino} from "./casino"
 import { Tragamoneda3 } from "./tragamonedas3";
 import { Tragamoneda5 } from "./tragamonedas5";
 import { Slot } from "./slot";
+import { JuegoDados } from "./JuegoDados"
+import { JugadorDados } from "./JugadorDados";
+import { Mano } from "./mano";
+import { Dado } from "./dado";
 
 import * as ReadlineSync from "readline-sync";
 
@@ -14,8 +18,12 @@ let input = ReadlineSync;
 /* SE CREAN LOS JUEGOS */
 let maquinaClasica = new Tragamoneda3("Tragamonedas Clasica", new Slot(["Naranja","Siete","BarBar","Pera","Banana","Cerezas"]), 3);
 let maquinaAvanzada = new Tragamoneda5("Tragamonedas Avanzada", new Slot(["Naranja","Siete","BarBar","Pera","Banana","Cerezas"]), 5,20000);
+let juegoDeDados = new JuegoDados("Juego Dados",new Mano(new Dado(),new Dado()));
+let juegoDeDados2 = new JuegoDados("Juego Dados",new Mano(new Dado(),new Dado()));
 miCasino.agergarJuegos(maquinaClasica);
 miCasino.agergarJuegos(maquinaAvanzada);
+miCasino.agergarJuegos(juegoDeDados2);
+miCasino.agergarJuegos(juegoDeDados);
 /* SE INGRESA EL USUARIO */
 
 miCasino.ingresoJugador(new Jugador( input.question("Ingrese un nombre para Registrarse: "), 0));
@@ -49,7 +57,11 @@ while (opciones > 0){
            break;
         case 4:
             /*DADOS*/
-            console.log("jugar Dados");
+            let jugadorDeDados = new JugadorDados(miCasino.getjugador(0).getNombre(),juegoDeDados,0) 
+            console.log(" ");
+            console.log(miCasino.getJuego(opciones-1).getDescripcion());
+            console.log(" ");
+            jugadorDeDados.jugarDados();
            break;  
         default:
             opciones = 0;

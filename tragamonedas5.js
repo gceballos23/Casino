@@ -35,6 +35,7 @@ var Tragamoneda5 = /** @class */ (function (_super) {
     Tragamoneda5.prototype.getJugadaPozoTotal = function () {
         return this.jugadaPozoTotal;
     };
+    /* DEFINIR LA JUGADA PARA GANAR EL POZO*/
     Tragamoneda5.prototype.setJugadaPozoTotal = function () {
         for (var i = 0; i < this.cantidadSlot; i++) {
             this.jugadaPozoTotal.push(this.slots[i].getFiguraMayor());
@@ -50,9 +51,6 @@ var Tragamoneda5 = /** @class */ (function (_super) {
     };
     Tragamoneda5.prototype.resetPremioPozo = function () {
         this.pozoTotal = 200;
-    };
-    Tragamoneda5.prototype.calcularPremio = function () {
-        return this.apuesta * (this.slots[0].getposicion() + 1) * 10;
     };
     Tragamoneda5.prototype.probabilidadGanar = function () {
         /* probalidad de 1 en 20 */
@@ -73,7 +71,6 @@ var Tragamoneda5 = /** @class */ (function (_super) {
                 control = 1;
             }
         }
-        /*        this.setHistorialJugadas(); */
         if (this.SaberSiEsJugadaGanadora()) {
             if (this.GanarPozo()) {
                 this.setPremio(this.getPozoTotal());

@@ -12,6 +12,7 @@ var Slot = /** @class */ (function () {
         this.UltimaJugada = this.figuras[posicion];
         this.setPosicion(posicion);
     };
+    /*FIGURA CON MAS PREMIO*/
     Slot.prototype.getFiguraMayor = function () {
         return this.figuras[this.figuras.length - 1];
     };
