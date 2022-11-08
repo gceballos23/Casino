@@ -20,7 +20,7 @@ var juegoCasino_1 = require("./juegoCasino");
 var ReadlineSync = require("readline-sync");
 var JuegoDados = /** @class */ (function (_super) {
     __extends(JuegoDados, _super);
-    function JuegoDados(pNombre, pMano) {
+    function JuegoDados(pNombre, pMano, pApuestaMinima) {
         var _this = _super.call(this, pNombre) || this;
         _this.mano = pMano;
         _this.cantidadIntentos = 0;
@@ -28,7 +28,7 @@ var JuegoDados = /** @class */ (function (_super) {
         _this.intentosHechos = 1;
         _this.ultimoNumero = 0;
         _this.dineroIgresado = 0;
-        _this.minimoApuesta = 0;
+        _this.minimoApuesta = pApuestaMinima;
         _this.apuesta = 0;
         _this.premio = 0;
         return _this;
@@ -119,6 +119,12 @@ var JuegoDados = /** @class */ (function (_super) {
         else {
             return false;
         }
+    };
+    JuegoDados.prototype.getApuestaMinima = function () {
+        return this.minimoApuesta;
+    };
+    JuegoDados.prototype.setApuestaMinima = function (pCantidad) {
+        this.minimoApuesta = pCantidad;
     };
     JuegoDados.prototype.jugar = function () {
         var gano = 0;

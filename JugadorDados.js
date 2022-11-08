@@ -57,21 +57,30 @@ var JugadorDados = /** @class */ (function (_super) {
     JugadorDados.prototype.menuSeguirJugando = function () {
         var input = ReadlineSync;
         var opcionSeguir = 0;
+        var opcionDinero = 0;
+        1;
         opcionSeguir = this.controlarOpcionNumerica(Number(input.question("Ingrese 1 si quiere jugar a los DADOS: ")));
         if (opcionSeguir === 1) {
-            this.dados.ingresarDinero(this.controlarDineroIngresado(Number(input.question("Ingrese Cantidad nueva de Dinero si lo desea: "))));
+            opcionDinero = this.controlarDineroIngresado(Number(input.question("Ingrese Cantidad nueva de Dinero si lo desea: ")));
+            if (opcionDinero > 0) {
+                this.dados.ingresarDinero(opcionDinero);
+            }
             this.dados.setApuesta(this.controlarDineroIngresado(Number(input.question("Ingrese el Dinero a Apostar: "))));
+            if (this.dados.getApuesta() === 0) {
+                opcionSeguir = 0;
+            }
         }
         return opcionSeguir;
     };
     /* METODO PARA JUGAR AL TRAGAMONEDAS*/
     JugadorDados.prototype.jugarDados = function () {
         while ((this.menuSeguirJugando() === 1) && (this.dados.getDineroIngresado() > 0)) {
-            if (this.dados.getApuesta() <= this.dados.getDineroIngresado()) {
+            if (this.dados.getApuesta() <= this.dados.getDineroIngresado() &&
+                this.dados.getApuesta() >= this.dados.getApuestaMinima()) {
                 this.dados.jugar();
             }
             else {
-                console.log("La apuesta es mayor a dinero que tiene!!");
+                console.log("Error en la Apuesta. Verificar si tiene dinero suficiente o si la Apuesta es Mayor o igual Apuesta Minima");
             }
         }
         console.log("Dinero a retirar: " + this.dados.getDineroIngresado());

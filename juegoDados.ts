@@ -13,7 +13,7 @@ export class JuegoDados extends JuegoCasino{
     protected apuesta : number;
     protected premio : number;
 
-    constructor(pNombre: string, pMano: Mano){
+    constructor(pNombre: string, pMano: Mano, pApuestaMinima: number){
         super(pNombre);
         this.mano = pMano;
         this.cantidadIntentos = 0;
@@ -21,7 +21,7 @@ export class JuegoDados extends JuegoCasino{
         this.intentosHechos = 1;
         this.ultimoNumero = 0;
         this.dineroIgresado = 0;
-        this.minimoApuesta = 0;
+        this.minimoApuesta = pApuestaMinima;
         this.apuesta = 0;
         this.premio= 0;
     }
@@ -131,6 +131,14 @@ export class JuegoDados extends JuegoCasino{
         } else{
            return false;   
         }       
+    }
+
+    public getApuestaMinima():number{
+        return this.minimoApuesta;
+    }
+
+    protected setApuestaMinima(pCantidad : number):void{
+        this.minimoApuesta = pCantidad;
     }
 
     public jugar(){

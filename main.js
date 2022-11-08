@@ -18,8 +18,8 @@ var input = ReadlineSync;
 /* SE CREAN LOS JUEGOS */
 var maquinaClasica = new tragamonedas3_1.Tragamoneda3("Tragamonedas Clasica", new slot_1.Slot(["Naranja", "Siete", "BarBar", "Pera", "Banana", "Cerezas"]), 3);
 var maquinaAvanzada = new tragamonedas5_1.Tragamoneda5("Tragamonedas Avanzada", new slot_1.Slot(["Naranja", "Siete", "BarBar", "Pera", "Banana", "Cerezas"]), 5, 20000);
-var juegoDeDados = new JuegoDados_1.JuegoDados("Juego Dados", new mano_1.Mano(new dado_1.Dado(), new dado_1.Dado()));
-var juegoDeDados2 = new JuegoDados_1.JuegoDados("Juego Dados", new mano_1.Mano(new dado_1.Dado(), new dado_1.Dado()));
+var juegoDeDados = new JuegoDados_1.JuegoDados("Juego Dados", new mano_1.Mano(new dado_1.Dado(), new dado_1.Dado()), 100);
+var juegoDeDados2 = new JuegoDados_1.JuegoDados("Juego Dados", new mano_1.Mano(new dado_1.Dado(), new dado_1.Dado()), 100);
 miCasino.agergarJuegos(maquinaClasica);
 miCasino.agergarJuegos(maquinaAvanzada);
 miCasino.agergarJuegos(juegoDeDados2);

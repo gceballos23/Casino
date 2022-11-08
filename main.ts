@@ -18,8 +18,8 @@ let input = ReadlineSync;
 /* SE CREAN LOS JUEGOS */
 let maquinaClasica = new Tragamoneda3("Tragamonedas Clasica", new Slot(["Naranja","Siete","BarBar","Pera","Banana","Cerezas"]), 3);
 let maquinaAvanzada = new Tragamoneda5("Tragamonedas Avanzada", new Slot(["Naranja","Siete","BarBar","Pera","Banana","Cerezas"]), 5,20000);
-let juegoDeDados = new JuegoDados("Juego Dados",new Mano(new Dado(),new Dado()));
-let juegoDeDados2 = new JuegoDados("Juego Dados",new Mano(new Dado(),new Dado()));
+let juegoDeDados = new JuegoDados("Juego Dados",new Mano(new Dado(),new Dado()),100);
+let juegoDeDados2 = new JuegoDados("Juego Dados",new Mano(new Dado(),new Dado()),100);
 miCasino.agergarJuegos(maquinaClasica);
 miCasino.agergarJuegos(maquinaAvanzada);
 miCasino.agergarJuegos(juegoDeDados2);
