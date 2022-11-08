@@ -57,7 +57,6 @@ var JugadorDados = /** @class */ (function (_super) {
     JugadorDados.prototype.menuSeguirJugando = function () {
         var input = ReadlineSync;
         var opcionSeguir = 0;
-        var opconApuesta = 0;
         opcionSeguir = this.controlarOpcionNumerica(Number(input.question("Ingrese 1 si quiere jugar a los DADOS: ")));
         if (opcionSeguir === 1) {
             this.dados.ingresarDinero(this.controlarDineroIngresado(Number(input.question("Ingrese Cantidad nueva de Dinero si lo desea: "))));

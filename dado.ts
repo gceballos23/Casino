@@ -3,6 +3,7 @@ export class Dado{
    protected valorString: string[];
 
    constructor(){
+    this.valorNumero = 0;
     this.valorString = [];
     this.setValorString();
     this.tirarDado();
@@ -17,7 +18,7 @@ export class Dado{
    }
 
    protected setNumero(pValorNumero: number):void{
-    this.valorNumero = pValorNumero + 1;
+    this.valorNumero = pValorNumero;
    }
 
    protected setValorString():void{
@@ -25,7 +26,7 @@ export class Dado{
    } 
 
    public tirarDado():void{
-    this.setNumero(Math.floor(Math.random() * this.valorString.length ));
+    this.setNumero(Math.floor(Math.random() * this.valorString.length)+1);
    }   
 
 

@@ -17,6 +17,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.JuegoDados = void 0;
 var juegoCasino_1 = require("./juegoCasino");
+var ReadlineSync = require("readline-sync");
 var JuegoDados = /** @class */ (function (_super) {
     __extends(JuegoDados, _super);
     function JuegoDados(pNombre, pMano) {
@@ -24,8 +25,8 @@ var JuegoDados = /** @class */ (function (_super) {
         _this.mano = pMano;
         _this.cantidadIntentos = 0;
         _this.setCantidadIntentos(2);
-        _this.IntentosHechos = 1;
-        _this.UltimoNumero = 0;
+        _this.intentosHechos = 1;
+        _this.ultimoNumero = 0;
         _this.dineroIgresado = 0;
         _this.minimoApuesta = 0;
         _this.apuesta = 0;
@@ -45,13 +46,16 @@ var JuegoDados = /** @class */ (function (_super) {
         this.cantidadIntentos = pCantidad;
     };
     JuegoDados.prototype.setUltimoNumero = function (pValorNumero) {
-        this.UltimoNumero = pValorNumero;
+        this.ultimoNumero = pValorNumero;
     };
     JuegoDados.prototype.getIntentosHechos = function () {
-        return this.IntentosHechos;
+        return this.intentosHechos;
     };
     JuegoDados.prototype.setIntentosHechos = function () {
-        this.IntentosHechos = this.IntentosHechos + 1;
+        this.intentosHechos++;
+    };
+    JuegoDados.prototype.resetIntentos = function () {
+        this.intentosHechos = 1;
     };
     JuegoDados.prototype.calcularPremio = function () {
         return this.apuesta * 2;
@@ -91,11 +95,11 @@ var JuegoDados = /** @class */ (function (_super) {
         return this.dineroIgresado;
     };
     JuegoDados.prototype.getUltimoSuma = function () {
-        return this.UltimoNumero;
+        return this.ultimoNumero;
     };
     JuegoDados.prototype.setUltimaSuma = function () {
         this.mano.tirarDados();
-        this.UltimoNumero = this.mano.getUltimoResultado();
+        this.ultimoNumero = this.mano.getUltimoResultado();
     };
     JuegoDados.prototype.setHistorialJugadas = function (pPremio) {
         var historial = this.leerArchivo(this.nombre + "-historial.txt");
@@ -104,32 +108,43 @@ var JuegoDados = /** @class */ (function (_super) {
         historial = historial + pPremio;
         this.guardarArchivo(this.nombre + "-historial.txt", historial);
     };
+    JuegoDados.prototype.tirarDados = function () {
+        this.setUltimaSuma();
+        console.log(this.mano.getValorString());
+    };
+    JuegoDados.prototype.verificarTiroGanador = function () {
+        if (this.ultimoNumero === 7 || this.ultimoNumero === 11) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     JuegoDados.prototype.jugar = function () {
         var gano = 0;
-        if (this.IntentosHechos <= this.cantidadIntentos && gano === 0) {
-            console.log("intento: " + this.IntentosHechos + " de " + this.cantidadIntentos);
-            this.setUltimaSuma();
-            if (this.UltimoNumero === 7 || this.UltimoNumero === 11) {
+        var input = ReadlineSync;
+        for (this.intentosHechos = 1; this.intentosHechos <= this.cantidadIntentos; this.intentosHechos++) {
+            console.log("intento: " + this.intentosHechos + " de " + this.cantidadIntentos);
+            input.question("Presione Enter para hacer el un nuvo intento: ");
+            this.tirarDados();
+            if (this.verificarTiroGanador() === true) {
                 gano = 1;
+                break;
             }
-            this.setIntentosHechos();
+            this.setHistorialJugadas(this.getPremio());
         }
-        if (gano = 1) {
+        if (gano === 1) {
             this.setPremio(this.calcularPremio());
             this.ingresarDinero(this.getPremio());
         }
         else {
-            if (this.IntentosHechos === this.cantidadIntentos) {
-                this.restarDineroIngresado();
-            }
+            this.restarDineroIngresado();
         }
-        this.setHistorialJugadas(this.getPremio());
-        if (this.IntentosHechos === this.cantidadIntentos || gano === 1) {
-            console.log(this.mano.getValorString());
-            console.log("Premio: " + this.getPremio());
-            console.log("Dinero: " + this.getDineroIngresado());
-            this.setPremio(0);
-        }
+        console.log("Premio: " + this.getPremio());
+        console.log("Dinero: " + this.getDineroIngresado());
+        this.setPremio(0);
+        this.resetIntentos();
+        this.setIntentosHechos();
     };
     return JuegoDados;
 }(juegoCasino_1.JuegoCasino));

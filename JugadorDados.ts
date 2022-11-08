@@ -48,7 +48,6 @@ export class JugadorDados extends Jugador{
     protected menuSeguirJugando():number{
         let input = ReadlineSync;
         let opcionSeguir : number = 0;
-        let opconApuesta : number = 0;
         opcionSeguir = this.controlarOpcionNumerica( Number( input.question("Ingrese 1 si quiere jugar a los DADOS: ")));
         if (opcionSeguir === 1){  
             this.dados.ingresarDinero(this.controlarDineroIngresado(Number(input.question("Ingrese Cantidad nueva de Dinero si lo desea: "))))          
@@ -59,11 +58,12 @@ export class JugadorDados extends Jugador{
         return opcionSeguir
     }
     /* METODO PARA JUGAR AL TRAGAMONEDAS*/
-    public jugarDados():void{     
+    public jugarDados():void{
         while ((this.menuSeguirJugando() === 1)&&(this.dados.getDineroIngresado()>0)){
             if (this.dados.getApuesta() <= this.dados.getDineroIngresado()){
-                
-                this.dados.jugar();             
+                  
+                this.dados.jugar();
+              
             } else {
                console.log("La apuesta es mayor a dinero que tiene!!") 
             }
