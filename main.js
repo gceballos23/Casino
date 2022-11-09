@@ -11,22 +11,26 @@ var JugadorDados_1 = require("./JugadorDados");
 var mano_1 = require("./mano");
 var dado_1 = require("./dado");
 var ReadlineSync = require("readline-sync");
+var BlackJack_1 = require("./BlackJack");
+var mazo_1 = require("./mazo");
+var jugadorCrupier_1 = require("./jugadorCrupier");
+var jugadorBlackJack_1 = require("./jugadorBlackJack");
 console.log(" ");
 var miCasino = new casino_1.Casino();
 var opciones = 0;
 var input = ReadlineSync;
+/* SE INGRESA EL USUARIO */
+miCasino.ingresoJugador(new jugador_1.Jugador(input.question("Ingrese un nombre para Registrarse: "), 0));
+console.log(" ");
 /* SE CREAN LOS JUEGOS */
 var maquinaClasica = new tragamonedas3_1.Tragamoneda3("Tragamonedas Clasica", new slot_1.Slot(["Naranja", "Siete", "BarBar", "Pera", "Banana", "Cerezas"]), 3);
 var maquinaAvanzada = new tragamonedas5_1.Tragamoneda5("Tragamonedas Avanzada", new slot_1.Slot(["Naranja", "Siete", "BarBar", "Pera", "Banana", "Cerezas"]), 5, 20000);
 var juegoDeDados = new JuegoDados_1.JuegoDados("Juego Dados", new mano_1.Mano(new dado_1.Dado(), new dado_1.Dado()), 100);
-var juegoDeDados2 = new JuegoDados_1.JuegoDados("Juego Dados", new mano_1.Mano(new dado_1.Dado(), new dado_1.Dado()), 100);
+var mesaBlackJack = new BlackJack_1.BlackJack("BlackJack", new mazo_1.Mazo(), new jugadorCrupier_1.JugadorCrupier("Crupier", 0), new jugadorBlackJack_1.JugadorBlackJack(miCasino.getjugador(0).getNombre(), 0));
 miCasino.agergarJuegos(maquinaClasica);
 miCasino.agergarJuegos(maquinaAvanzada);
-miCasino.agergarJuegos(juegoDeDados2);
+miCasino.agergarJuegos(mesaBlackJack);
 miCasino.agergarJuegos(juegoDeDados);
-/* SE INGRESA EL USUARIO */
-miCasino.ingresoJugador(new jugador_1.Jugador(input.question("Ingrese un nombre para Registrarse: "), 0));
-console.log(" ");
 /* OPCIONES PARA JUGAR LOS DISTINTOS JUEGOS*/
 opciones = Number(input.question("TRAGAMONEDAS 3 SLOTS: 1 - TRAGAMONEDAS 5 SLOTS : 2 - BLACKJACK: 3 - DADOS: 4 - 0 SALIR- "));
 while (opciones > 0) {
@@ -49,7 +53,10 @@ while (opciones > 0) {
             break;
         case 3:
             /*BLACKJACK*/
-            console.log("jugar BlackJack");
+            console.log(" ");
+            console.log(miCasino.getJuego(opciones - 1).getDescripcion());
+            mesaBlackJack.jugarBlackJack();
+            console.log(" ");
             break;
         case 4:
             /*DADOS*/

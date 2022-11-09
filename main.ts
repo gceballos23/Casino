@@ -60,6 +60,7 @@ while (opciones > 0){
             /*BLACKJACK*/
             console.log(" ");
             console.log(miCasino.getJuego(opciones-1).getDescripcion());
+            mesaBlackJack.jugarBlackJack();
             console.log(" ");
            break;
         case 4:

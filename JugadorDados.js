@@ -58,7 +58,6 @@ var JugadorDados = /** @class */ (function (_super) {
         var input = ReadlineSync;
         var opcionSeguir = 0;
         var opcionDinero = 0;
-        1;
         opcionSeguir = this.controlarOpcionNumerica(Number(input.question("Ingrese 1 si quiere jugar a los DADOS: ")));
         if (opcionSeguir === 1) {
             opcionDinero = this.controlarDineroIngresado(Number(input.question("Ingrese Cantidad nueva de Dinero si lo desea: ")));
@@ -75,8 +74,7 @@ var JugadorDados = /** @class */ (function (_super) {
     /* METODO PARA JUGAR AL TRAGAMONEDAS*/
     JugadorDados.prototype.jugarDados = function () {
         while ((this.menuSeguirJugando() === 1) && (this.dados.getDineroIngresado() > 0)) {
-            if (this.dados.getApuesta() <= this.dados.getDineroIngresado() &&
-                this.dados.getApuesta() >= this.dados.getApuestaMinima()) {
+            if (this.dados.getApuesta() <= this.dados.getDineroIngresado()) {
                 this.dados.jugar();
             }
             else {

@@ -1,0 +1,8 @@
+BlackJack
+
+El Black Jack es uno de los juegos más populares del Casino. 
+El objetivo es simple: ganarle al Croupier obteniendo el puntaje más cercano a 21.
+
+APUESTA MINIMA 100
+
+PREMIO : EL DOBLE DE LO APOSTADO

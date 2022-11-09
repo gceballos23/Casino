@@ -40,7 +40,7 @@ export class JugadorBlackJack extends Jugador {
     public MostrarCartas():string{
         let cartasMostrar : string = " ";
         for (let index = 0; index < this.mano.length ;index++) {
-           cartasMostrar =  this.mano[index].getNombreCarta() + " ";
+           cartasMostrar = cartasMostrar + " " + this.mano[index].getNombreCarta() + " ";
         }
 
         return cartasMostrar;

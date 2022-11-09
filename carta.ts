@@ -2,10 +2,11 @@ export class Carta{
     protected palo : string;
     protected nombreCarta: string;
     protected ValorNumerico : number;
+    
     constructor(pPalo: string, pNombreCarta: string,pValorNUmerico: number){
         this.palo =  pPalo;
         this.nombreCarta = pNombreCarta;
-        this.ValorNumerico = this.ValorNumerico;
+        this.ValorNumerico = pValorNUmerico;
     }
 
     public getPalo():string{

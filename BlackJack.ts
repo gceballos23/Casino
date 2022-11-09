@@ -122,10 +122,13 @@ export class BlackJack extends JuegoCasino{
     }
 
     public jugarBlackJack():void{
-        this.mazoCartas.mezclarCartas();       
+        console.log(this.mazoCartas);
+
+//        this.mazoCartas.mezclarCartas();       
         while ((this.menuSeguirJugando() === 1)&&(this.getDineroIngresado()>0)){
             if (this.getApuesta() <= this.getDineroIngresado()){
                 if (this.mazoCartas.cartasEnelMazo() > 10){
+                    console.log(this.mazoCartas.cartasEnelMazo());
                     this.jugar();              
                 }    
 
@@ -140,12 +143,12 @@ export class BlackJack extends JuegoCasino{
     }
 
     protected mostrarCartasJugadorBJ():void{
-        console.log("Cartas Jugador" + this.jugadorBJ.MostrarCartas());
+        console.log("Cartas Crupier" + this.jugadorBJ.MostrarCartas());
 
     }
 
     protected mostrarCartasCrupier():void{
-        console.log("Cartas Jugador" + this.crupier.MostrarCartas());
+        console.log("Cartas Crupier: " + this.crupier.MostrarCartas());
     }
 
 
@@ -172,6 +175,9 @@ export class BlackJack extends JuegoCasino{
         //mostrar cartas
         this.mostrarCartasJugadorBJ();
         this.mostrarCartasCrupier();
+
+        console.log(this.jugadorBJ.getTotalMano());
+        console.log(this.crupier.getTotalMano());
         
         //juego del jugador
         while(this.jugadorBJ.getTotalMano()<=21){

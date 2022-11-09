@@ -11,8 +11,8 @@ export class Mazo{
     protected generarCartas():void{
 
         let palos : string[] = ["PICAS","CORAZONES","DIAMANTES","TREBOLES"];
-        for (let i = 0; i < palos.length; i++) {
-            for(let j = 1; j<13;j++){
+        for (let i :number = 0; i < palos.length; i++) {
+            for(let j : number = 1; j <= 13; j++){
                this.cartas.push(new Carta(palos[i],this.setNombreCarta(j),this.setValorCarta(j)))  
             }     
         }
@@ -22,65 +22,90 @@ export class Mazo{
         let valorString :string ="";
         switch (valor) {
             case valor: 1
-                valorString = "UNO" 
+                valorString = "UNO";
+                break; 
             case valor: 2
-                valorString = "DOS"         
+                valorString = "DOS";
+                break;         
             case valor: 3
-                valorString = "TRES"
+                valorString = "TRES";
+                break;
             case valor: 4
-                valorString = "CUATRO"
+                valorString = "CUATRO";
+                break;
             case valor: 5
-                valorString = "CINCO"
+                valorString = "CINCO";
+                break;
             case valor: 6
-                valorString = "SEIS"
+                valorString = "SEIS";
+                break;
             case valor: 7
-                valorString = "SIETE"
+                valorString = "SIETE";
+                break;
             case valor: 8
-                valorString = "OCHO"
+                valorString = "OCHO";
+                break;
             case valor: 9
-                valorString = "NUEVE"
+                valorString = "NUEVE";
+                break;
             case valor: 10
-                valorString = "DIEZ"
+                valorString = "DIEZ";
+                break;
             case valor: 11
-                valorString = "JACK"
+                valorString = "JACK";
+                break;
             case valor: 12
-                valorString = "QUEEN"
+                valorString = "QUEEN";
+                break;
             case valor: 13
-                valorString = "KING"
+                valorString = "KING";
+                break;
+
         }       
         return valorString; 
     }
 
     protected setValorCarta(valor: number):number{
-        let valorCarta :number = 1;
+        let valorCarta :number = 0;
         switch (valor) {
             case valor: 1
-                valorCarta = 1 
+                valorCarta = 1;
+                break; 
             case valor: 2
-                valorCarta = 2         
+                valorCarta = 2;
+                break;         
             case valor: 3
-                valorCarta = 3
+                valorCarta = 3;
+                break;
             case valor: 4
-                valorCarta = 4
+                valorCarta = 4;
+                break;
             case valor: 5
-                valorCarta = 5
+                valorCarta = 5;
+                break;
             case valor: 6
-                valorCarta = 6
+                valorCarta = 6;
+                break;
             case valor: 7
-                valorCarta = 7
+                valorCarta = 7;
+                break;
             case valor: 8
-                valorCarta = 8
+                valorCarta = 8;
+                break;
             case valor: 9
-                valorCarta = 9
+                valorCarta = 9;
+                break;
             case valor: 10
-                valorCarta = 10
+                valorCarta = 10;
+                break;
             case valor: 11
-                valorCarta = 10
+                valorCarta = 10;
+                break;
             case valor: 12
-                valorCarta = 10
+                valorCarta = 10;
+                break;
             case valor: 13
-                valorCarta = 10
-            default:
+                valorCarta = 10;
                 break;
         } 
         return valorCarta;       
