@@ -93,8 +93,8 @@ export class BlackJack extends JuegoCasino{
     protected setHistorialJugadas(pPremio: number):void{
         let historial : string = this.leerArchivo(this.nombre+"-historial.txt");
         historial = historial + "\n"; 
-        historial = historial + this.crupier.getMano() + ",";
-        historial = historial + this.jugadorBJ.getMano() + ",";
+        historial = historial + this.crupier.getTotalMano() + ",";
+        historial = historial + this.jugadorBJ.getTotalMano() + ",";
         historial = historial + pPremio;
 
         this.guardarArchivo(this.nombre+"-historial.txt",historial);  

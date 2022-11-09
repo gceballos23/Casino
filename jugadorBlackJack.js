@@ -35,8 +35,15 @@ var JugadorBlackJack = /** @class */ (function (_super) {
     };
     JugadorBlackJack.prototype.getTotalMano = function () {
         var temp_TotalMano = 0;
+        var cantidadAss = 0;
         for (var index = 0; index < this.mano.length; index++) {
             temp_TotalMano = temp_TotalMano + this.mano[index].getValorNumerico();
+            if (this.mano[index].getValorNumerico() === 11) {
+                cantidadAss = cantidadAss + 1;
+            }
+        }
+        if (cantidadAss > 0 && temp_TotalMano > 21) {
+            temp_TotalMano = temp_TotalMano - (cantidadAss * 10);
         }
         return temp_TotalMano;
     };

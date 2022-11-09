@@ -64,7 +64,7 @@ var Mazo = /** @class */ (function () {
         var valorCarta = 0;
         switch (valor) {
             case 1:
-                valorCarta = 1;
+                valorCarta = 11;
                 break;
             case 2:
                 valorCarta = 2;

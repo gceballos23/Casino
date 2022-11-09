@@ -87,6 +87,17 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
             return 0;
         }
     };
+    // GUARDA LA JUGADA EN EL HISTORIAL DEL JUEGO
+    BlackJack.prototype.setHistorialJugadas = function (pPremio) {
+        var historial = this.leerArchivo(this.nombre + "-historial.txt");
+        historial = historial + "\n";
+        historial = historial + this.crupier.getTotalMano() + ",";
+        historial = historial + this.jugadorBJ.getTotalMano() + ",";
+        historial = historial + pPremio;
+        this.guardarArchivo(this.nombre + "-historial.txt", historial);
+    };
+    //SIMULAR UN MENU DONDE SE AGREGAN
+    //JUGAR - DINERO INGRESADO - APUESTA
     BlackJack.prototype.menuSeguirJugando = function () {
         var input = ReadlineSync;
         var opcionSeguir = 0;
@@ -105,6 +116,7 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
         }
         return opcionSeguir;
     };
+    // REPARTE LAS PRIMERAS DOS CARTAS EN EL JUEGO
     BlackJack.prototype.repartirPrimeraMano = function () {
         for (var i = 0; i < 2; i++) {
             this.jugadorBJ.PedirCarta(this.mazoCartas.sacarCarta());
@@ -113,8 +125,13 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
     };
     BlackJack.prototype.jugarBlackJack = function () {
         this.mazoCartas.mezclarCartas();
+        // ingreso de los datos 
+        // SEGUIR JUGANDO
+        // INGRESAR MAS DINERO
+        // INGRESAR LA APUESTA       
         while ((this.menuSeguirJugando() === 1) && (this.getDineroIngresado() > 0)) {
             if (this.getApuesta() <= this.getDineroIngresado() && this.getApuesta() > 0) {
+                //JUGAR SI HAY CARTAS 
                 if (this.mazoCartas.cartasEnelMazo() > 10) {
                     this.jugar();
                 }
@@ -136,12 +153,15 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
     };
     BlackJack.prototype.verificarGanaJugador = function () {
         var ganador = false;
+        //verificar si es mayor a 21 la mano del jugador 
         if (this.jugadorBJ.getTotalMano() > 21) {
             ganador = false;
         }
+        // Verificar si el crupier se pasa  y el jugador no
         if (this.crupier.getTotalMano() > 21 && this.jugadorBJ.getTotalMano() <= 21) {
             ganador = true;
         }
+        // verificar si la mano del jugador es mayor que la del crupier
         if (this.crupier.getTotalMano() <= 21 && this.jugadorBJ.getTotalMano() <= 21) {
             if (this.jugadorBJ.getTotalMano() > this.crupier.getTotalMano()) {
                 ganador = true;
@@ -191,8 +211,12 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
         else {
             this.restarDineroIngresado();
         }
+        //guardar historial de jugadas
+        this.setHistorialJugadas(this.getPremio());
+        //mostrar premios    
         console.log("Premio: " + this.getPremio());
         console.log("Dinero: " + this.getDineroIngresado());
+        //resetear Juego
         this.setPremio(0);
         this.jugadorBJ.resetMano();
         this.crupier.resetMano();
