@@ -3,8 +3,6 @@ import { JuegoCasino } from "./juegoCasino";
 import { JugadorCrupier } from "./jugadorCrupier";
 import { JugadorBlackJack } from "./jugadorBlackJack";
 import * as ReadlineSync from "readline-sync";
-import { Mano } from "./mano";
-
 
 export class BlackJack extends JuegoCasino{
     protected mazoCartas: Mazo;
@@ -91,8 +89,19 @@ export class BlackJack extends JuegoCasino{
         }
 
     }
+    // GUARDA LA JUGADA EN EL HISTORIAL DEL JUEGO
+    protected setHistorialJugadas(pPremio: number):void{
+        let historial : string = this.leerArchivo(this.nombre+"-historial.txt");
+        historial = historial + "\n"; 
+        historial = historial + this.crupier.getMano() + ",";
+        historial = historial + this.jugadorBJ.getMano() + ",";
+        historial = historial + pPremio;
 
+        this.guardarArchivo(this.nombre+"-historial.txt",historial);  
+    }
     
+    //SIMULAR UN MENU DONDE SE AGREGAN
+    //JUGAR - DINERO INGRESADO - APUESTA
     protected menuSeguirJugando():number{
         let input = ReadlineSync;
         let opcionSeguir : number = 0;
@@ -113,7 +122,7 @@ export class BlackJack extends JuegoCasino{
 
         return opcionSeguir
     }
-
+    // REPARTE LAS PRIMERAS DOS CARTAS EN EL JUEGO
     protected repartirPrimeraMano():void{
         for (let i = 0; i < 2; i++) {
             this.jugadorBJ.PedirCarta(this.mazoCartas.sacarCarta())
@@ -122,18 +131,21 @@ export class BlackJack extends JuegoCasino{
     }
 
     public jugarBlackJack():void{
-        console.log(this.mazoCartas);
-
-//        this.mazoCartas.mezclarCartas();       
+        this.mazoCartas.mezclarCartas();
+        // ingreso de los datos 
+        // SEGUIR JUGANDO
+        // INGRESAR MAS DINERO
+        // INGRESAR LA APUESTA       
         while ((this.menuSeguirJugando() === 1)&&(this.getDineroIngresado()>0)){
-            if (this.getApuesta() <= this.getDineroIngresado()){
+            if (this.getApuesta() <= this.getDineroIngresado() && this.getApuesta()>0){
+                //JUGAR SI HAY CARTAS 
                 if (this.mazoCartas.cartasEnelMazo() > 10){
-                    console.log(this.mazoCartas.cartasEnelMazo());
                     this.jugar();              
                 }    
 
             } else {
-               console.log("Error en la Apuesta. Verificar si tiene dinero suficiente o si la Apuesta es Mayor o igual Apuesta Minima") 
+               console.log("Error en la Apuesta. Verificar si tiene dinero suficiente o si la Apuesta es Mayor o igual Apuesta Minima")
+               break; 
             }
         }
         console.log("Dinero a retirar: " + this.getDineroIngresado());
@@ -143,7 +155,7 @@ export class BlackJack extends JuegoCasino{
     }
 
     protected mostrarCartasJugadorBJ():void{
-        console.log("Cartas Crupier" + this.jugadorBJ.MostrarCartas());
+        console.log("Cartas jugador BlackJack" + this.jugadorBJ.MostrarCartas());
 
     }
 
@@ -153,15 +165,26 @@ export class BlackJack extends JuegoCasino{
 
 
     protected verificarGanaJugador():boolean{
+        let ganador :boolean = false;
+        //verificar si es mayor a 21 la mano del jugador 
         if (this.jugadorBJ.getTotalMano()>21){
-            return false;
-        }else{
+            ganador = false;
+        }
+        // Verificar si el crupier se pasa  y el jugador no
+        if (this.crupier.getTotalMano()>21 && this.jugadorBJ.getTotalMano()<=21 ){
+            ganador =  true;
+        }
+        
+        // verificar si la mano del jugador es mayor que la del crupier
+        if (this.crupier.getTotalMano()<=21 && this.jugadorBJ.getTotalMano()<=21 ){
             if (this.jugadorBJ.getTotalMano() > this.crupier.getTotalMano()){
-                return true;
+                ganador =  true;
             }else{
-                return false;
+                ganador = false;
             }
         }
+
+        return ganador
     }
 
     
@@ -176,8 +199,6 @@ export class BlackJack extends JuegoCasino{
         this.mostrarCartasJugadorBJ();
         this.mostrarCartasCrupier();
 
-        console.log(this.jugadorBJ.getTotalMano());
-        console.log(this.crupier.getTotalMano());
         
         //juego del jugador
         while(this.jugadorBJ.getTotalMano()<=21){
@@ -190,13 +211,15 @@ export class BlackJack extends JuegoCasino{
             }
         }
         //juego del crupier
-        while(this.crupier.getTotalMano()<=21){
-            if (this.crupier.quedarse()=== false){
-
-               this.crupier.PedirCarta(this.mazoCartas.sacarCarta()); 
-               this.mostrarCartasCrupier(); 
-            }else{
-                break;
+        if (this.jugadorBJ.getTotalMano()<=21) {        
+            while(this.crupier.getTotalMano()<=21){
+                if (this.crupier.quedarse()=== false){
+                    input.question( "PRESIONE UNA TECLA PARA SIGUIENTE CARTA DEL CRUPIER") 
+                this.crupier.PedirCarta(this.mazoCartas.sacarCarta()); 
+                this.mostrarCartasCrupier(); 
+                }else{
+                    break;
+                }
             }
         }
 
@@ -208,16 +231,18 @@ export class BlackJack extends JuegoCasino{
         } else {
             this.restarDineroIngresado();
         }
-            
+        
+        //guardar historial de jugadas
+        this.setHistorialJugadas(this.getPremio());
+
+        //mostrar premios    
         console.log("Premio: " + this.getPremio())
         console.log("Dinero: " + this.getDineroIngresado());
+        //resetear Juego
         this.setPremio(0);
         this.jugadorBJ.resetMano();
         this.crupier.resetMano();  
 
     }
-
-
-
 
 }
