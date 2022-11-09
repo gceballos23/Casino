@@ -48,7 +48,7 @@ export class JugadorDados extends Jugador{
     protected menuSeguirJugando():number{
         let input = ReadlineSync;
         let opcionSeguir : number = 0;
-        let opcionDinero : number = 0;1
+        let opcionDinero : number = 0;
         opcionSeguir = this.controlarOpcionNumerica( Number( input.question("Ingrese 1 si quiere jugar a los DADOS: ")));
         if (opcionSeguir === 1){  
             opcionDinero = this.controlarDineroIngresado(Number(input.question("Ingrese Cantidad nueva de Dinero si lo desea: ")));
