@@ -18,56 +18,43 @@ var Mazo = /** @class */ (function () {
     Mazo.prototype.setNombreCarta = function (valor) {
         var valorString = "";
         switch (valor) {
-            case valor:
-                1;
+            case 1:
                 valorString = "UNO";
                 break;
-            case valor:
-                2;
+            case 2:
                 valorString = "DOS";
                 break;
-            case valor:
-                3;
+            case 3:
                 valorString = "TRES";
                 break;
-            case valor:
-                4;
+            case 4:
                 valorString = "CUATRO";
                 break;
-            case valor:
-                5;
+            case 5:
                 valorString = "CINCO";
                 break;
-            case valor:
-                6;
+            case 6:
                 valorString = "SEIS";
                 break;
-            case valor:
-                7;
+            case 7:
                 valorString = "SIETE";
                 break;
-            case valor:
-                8;
+            case 8:
                 valorString = "OCHO";
                 break;
-            case valor:
-                9;
+            case 9:
                 valorString = "NUEVE";
                 break;
-            case valor:
-                10;
+            case 10:
                 valorString = "DIEZ";
                 break;
-            case valor:
-                11;
+            case 11:
                 valorString = "JACK";
                 break;
-            case valor:
-                12;
+            case 12:
                 valorString = "QUEEN";
                 break;
-            case valor:
-                13;
+            case 13:
                 valorString = "KING";
                 break;
         }
@@ -76,56 +63,43 @@ var Mazo = /** @class */ (function () {
     Mazo.prototype.setValorCarta = function (valor) {
         var valorCarta = 0;
         switch (valor) {
-            case valor:
-                1;
+            case 1:
                 valorCarta = 1;
                 break;
-            case valor:
-                2;
+            case 2:
                 valorCarta = 2;
                 break;
-            case valor:
-                3;
+            case 3:
                 valorCarta = 3;
                 break;
-            case valor:
-                4;
+            case 4:
                 valorCarta = 4;
                 break;
-            case valor:
-                5;
+            case 5:
                 valorCarta = 5;
                 break;
-            case valor:
-                6;
+            case 6:
                 valorCarta = 6;
                 break;
-            case valor:
-                7;
+            case 7:
                 valorCarta = 7;
                 break;
-            case valor:
-                8;
+            case 8:
                 valorCarta = 8;
                 break;
-            case valor:
-                9;
+            case 9:
                 valorCarta = 9;
                 break;
-            case valor:
-                10;
+            case 10:
                 valorCarta = 10;
                 break;
-            case valor:
-                11;
+            case 11:
                 valorCarta = 10;
                 break;
-            case valor:
-                12;
+            case 12:
                 valorCarta = 10;
                 break;
-            case valor:
-                13;
+            case 13:
                 valorCarta = 10;
                 break;
         }

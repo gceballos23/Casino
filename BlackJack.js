@@ -112,17 +112,16 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
         }
     };
     BlackJack.prototype.jugarBlackJack = function () {
-        console.log(this.mazoCartas);
-        //        this.mazoCartas.mezclarCartas();       
+        this.mazoCartas.mezclarCartas();
         while ((this.menuSeguirJugando() === 1) && (this.getDineroIngresado() > 0)) {
-            if (this.getApuesta() <= this.getDineroIngresado()) {
+            if (this.getApuesta() <= this.getDineroIngresado() && this.getApuesta() > 0) {
                 if (this.mazoCartas.cartasEnelMazo() > 10) {
-                    console.log(this.mazoCartas.cartasEnelMazo());
                     this.jugar();
                 }
             }
             else {
                 console.log("Error en la Apuesta. Verificar si tiene dinero suficiente o si la Apuesta es Mayor o igual Apuesta Minima");
+                break;
             }
         }
         console.log("Dinero a retirar: " + this.getDineroIngresado());
@@ -130,23 +129,28 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
         this.ingresarDinero(-this.getDineroIngresado());
     };
     BlackJack.prototype.mostrarCartasJugadorBJ = function () {
-        console.log("Cartas Crupier" + this.jugadorBJ.MostrarCartas());
+        console.log("Cartas jugador BlackJack" + this.jugadorBJ.MostrarCartas());
     };
     BlackJack.prototype.mostrarCartasCrupier = function () {
         console.log("Cartas Crupier: " + this.crupier.MostrarCartas());
     };
     BlackJack.prototype.verificarGanaJugador = function () {
+        var ganador = false;
         if (this.jugadorBJ.getTotalMano() > 21) {
-            return false;
+            ganador = false;
         }
-        else {
+        if (this.crupier.getTotalMano() > 21 && this.jugadorBJ.getTotalMano() <= 21) {
+            ganador = true;
+        }
+        if (this.crupier.getTotalMano() <= 21 && this.jugadorBJ.getTotalMano() <= 21) {
             if (this.jugadorBJ.getTotalMano() > this.crupier.getTotalMano()) {
-                return true;
+                ganador = true;
             }
             else {
-                return false;
+                ganador = false;
             }
         }
+        return ganador;
     };
     BlackJack.prototype.jugar = function () {
         var input = ReadlineSync;
@@ -156,8 +160,6 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
         //mostrar cartas
         this.mostrarCartasJugadorBJ();
         this.mostrarCartasCrupier();
-        console.log(this.jugadorBJ.getTotalMano());
-        console.log(this.crupier.getTotalMano());
         //juego del jugador
         while (this.jugadorBJ.getTotalMano() <= 21) {
             if (this.jugadorBJ.quedarse(input.question("SE PLANTA??  si/no ")) === false) {
@@ -169,13 +171,16 @@ SI INGRESA CUALQUIER OTRO VALOR QUE NO SEA 1 LO TOMARA COMO 0 */
             }
         }
         //juego del crupier
-        while (this.crupier.getTotalMano() <= 21) {
-            if (this.crupier.quedarse() === false) {
-                this.crupier.PedirCarta(this.mazoCartas.sacarCarta());
-                this.mostrarCartasCrupier();
-            }
-            else {
-                break;
+        if (this.jugadorBJ.getTotalMano() <= 21) {
+            while (this.crupier.getTotalMano() <= 21) {
+                if (this.crupier.quedarse() === false) {
+                    input.question("PRESIONE UNA TECLA PARA SIGUIENTE CARTA DEL CRUPIER");
+                    this.crupier.PedirCarta(this.mazoCartas.sacarCarta());
+                    this.mostrarCartasCrupier();
+                }
+                else {
+                    break;
+                }
             }
         }
         //verificar si gano jugador y realizar los pagos
